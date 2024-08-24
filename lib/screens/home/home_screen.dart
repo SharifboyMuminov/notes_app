@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mynotes/screens/add_notes/add_notes_screen.dart';
 import 'package:mynotes/screens/home/widget/home_item.dart';
 import 'package:mynotes/screens/home/widget/my_floating_action_button.dart';
 import 'package:mynotes/screens/widget/main_icon_button.dart';
@@ -50,7 +51,16 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
       ),
-      floatingActionButton: MyFloatingActionButton(onTab: () {}),
+      floatingActionButton: MyFloatingActionButton(onTab: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return AddNotesScreen();
+            },
+          ),
+        );
+      }),
     );
   }
 }

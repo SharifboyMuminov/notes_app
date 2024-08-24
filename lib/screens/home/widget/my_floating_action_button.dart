@@ -42,7 +42,7 @@ class MyFloatingActionButton extends StatelessWidget {
               100.r,
             ),
           ),
-          onPressed: () {},
+          onPressed: onTab,
           child: SvgPicture.asset(
             AppImages.plusSvg,
             width: 48.we,
