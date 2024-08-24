@@ -45,7 +45,7 @@ class _SplashCreenState extends State<SplashCreen> {
         statusBarColor: AppColors.c252525,
       ),
       child: Scaffold(
-        backgroundColor: AppColors.c252525,
+
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [Lottie.asset("assets/lottie/splash_animetion.json")],
