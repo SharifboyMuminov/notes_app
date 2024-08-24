@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mynotes/main.dart';
 import 'package:mynotes/screens/add_notes/widget/text_from_file_title.dart';
 import 'package:mynotes/screens/widget/main_icon_button.dart';
 import 'package:mynotes/utils/app_colors.dart';
@@ -45,6 +44,32 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
         child: Column(
           children: [
             TextFromFileTitle(),
+            40.getH(),
+            TextFormField(
+              textInputAction: TextInputAction.done,
+              maxLines: null,
+              style: AppTextStyle.nunitoRegular.copyWith(
+                fontSize: 23.sp,
+                color: AppColors.white,
+              ),
+              cursorColor: AppColors.white,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.zero,
+                hintText: "Type something...",
+                hintStyle: AppTextStyle.nunitoRegular.copyWith(
+                  fontSize: 23.sp,
+                  color: AppColors.c9A9A9A,
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.zero,
+                  borderSide: BorderSide(color: Colors.transparent),
+                ),
+                enabledBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.zero,
+                  borderSide: BorderSide(color: Colors.transparent),
+                ),
+              ),
+            ),
           ],
         ),
       ),
