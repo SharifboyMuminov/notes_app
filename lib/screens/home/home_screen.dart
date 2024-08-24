@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mynotes/screens/home/widget/my_floating_action_button.dart';
 import 'package:mynotes/screens/widget/main_icon_button.dart';
 import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
           15.getW(),
         ],
       ),
+      floatingActionButton: MyFloatingActionButton(onTab: () {}),
     );
   }
 }
