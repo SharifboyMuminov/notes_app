@@ -29,14 +29,14 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             useMaterial3: true,
             scaffoldBackgroundColor: AppColors.c252525,
-            appBarTheme: AppBarTheme(
+            appBarTheme: const AppBarTheme(
               backgroundColor: AppColors.c252525,
             ),
           ),
           home: child,
         );
       },
-      child: SplashCreen(),
+      child: const SplashCreen(),
     );
   }
 }

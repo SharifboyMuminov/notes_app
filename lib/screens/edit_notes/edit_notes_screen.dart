@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:mynotes/screens/doalogs/save_question_dialog.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/screens/widget/text_from_file_sub_title.dart';
 import 'package:mynotes/screens/widget/text_from_file_title.dart';
 import 'package:mynotes/screens/widget/main_icon_button.dart';
+import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
+import 'package:mynotes/utils/app_text_style.dart';
 
-class AddNotesScreen extends StatefulWidget {
-  const AddNotesScreen({super.key});
+class EditNotesScreen extends StatefulWidget {
+  const EditNotesScreen({super.key});
 
   @override
-  State<AddNotesScreen> createState() => _AddNotesScreenState();
+  State<EditNotesScreen> createState() => _EditNotesScreenState();
 }
 
-class _AddNotesScreenState extends State<AddNotesScreen> {
+class _EditNotesScreenState extends State<EditNotesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,14 +31,7 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
           ),
           const Spacer(),
           MainIconButton(
-            onTab: () {
-              showSaveQuestion(
-                context,
-                onTabSave: () {},
-                onTabDiscard: () {},
-                title: "O'zgarishlar saqlansinmi?",
-              );
-            },
+            onTab: () {},
             iconPath: AppImages.saveSvg,
           ),
           15.getW(),
@@ -49,6 +44,7 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
             TextFromFileTitle(),
             40.getH(),
             TextFromFileSubTitle(),
+
           ],
         ),
       ),
