@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mynotes/screens/doalogs/save_question_dialog.dart';
+import 'package:mynotes/screens/dialogs/save_question_dialog.dart';
 import 'package:mynotes/screens/widget/text_from_file_sub_title.dart';
 import 'package:mynotes/screens/widget/text_from_file_title.dart';
 import 'package:mynotes/screens/widget/main_icon_button.dart';
