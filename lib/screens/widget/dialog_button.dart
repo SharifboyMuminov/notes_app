@@ -17,21 +17,23 @@ class DialogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 25.we, vertical: 7.he),
-        backgroundColor: backgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.r),
+    return Expanded(
+      child: TextButton(
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.symmetric(horizontal: 25.we, vertical: 7.he),
+          backgroundColor: backgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.r),
+          ),
         ),
-      ),
-      onPressed: onTab,
-      child: Text(
-        title,
-        style: TextStyle(
-          color: AppColors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w400,
+        onPressed: onTab,
+        child: Text(
+          title,
+          style: TextStyle(
+            color: AppColors.white,
+            fontSize: 18.sp,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ),
     );
