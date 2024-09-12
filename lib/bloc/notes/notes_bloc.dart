@@ -8,7 +8,10 @@ import 'package:mynotes/data/model/sqflite_response.dart';
 class NotesBloc extends Bloc<NotesEvent, NotesState> {
   NotesBloc(this._localDatabase) : super(NotesState.initial()) {
     on<NotesFetchEvent>(_fetchNotes);
+    on<NotesAddEvent>(_addNotes);
   }
+
+  final LocalDatabase _localDatabase;
 
   Future<void> _fetchNotes(NotesFetchEvent event, emit) async {
     emit(state.copyWith(formStatus: FormStatus.loading));
@@ -33,5 +36,21 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     }
   }
 
-  final LocalDatabase _localDatabase;
+  Future<void> _addNotes(NotesAddEvent event, emit) async {
+    emit(state.copyWith(formStatus: FormStatus.loading));
+
+    SqfliteResponse sqfliteResponse =
+        await _localDatabase.insertNotes(event.notesModel);
+
+    if (sqfliteResponse.errorText.isEmpty) {
+      add(NotesFetchEvent());
+    } else {
+      emit(
+        state.copyWith(
+          formStatus: FormStatus.error,
+          errorText: sqfliteResponse.errorText,
+        ),
+      );
+    }
+  }
 }

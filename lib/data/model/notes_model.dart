@@ -2,28 +2,29 @@ import 'package:flutter/material.dart';
 
 class NotesModel {
   int? id;
-  String fullName;
-  String text;
+  String title;
+  String subTitle;
   String date;
   String createDate;
   Color color;
   bool isRemove;
 
-  NotesModel(
-      {required this.date,
-        required this.color,
-        required this.fullName,
-        required this.text,
-        required this.createDate,
-        this.isRemove = false,
-        this.id});
+  NotesModel({
+    required this.date,
+    required this.color,
+    required this.title,
+    required this.subTitle,
+    required this.createDate,
+    this.isRemove = false,
+    this.id,
+  });
 
   factory NotesModel.fromJson(Map<String, dynamic> json) {
     debugPrint(json[NotesConstanse.color].toString());
     return NotesModel(
       id: json[NotesConstanse.id] as int? ?? 0,
-      fullName: json[NotesConstanse.name] as String? ?? "Null",
-      text: json[NotesConstanse.description] as String? ?? "Null",
+      title: json[NotesConstanse.name] as String? ?? "",
+      subTitle: json[NotesConstanse.description] as String? ?? "",
       date: json[NotesConstanse.date] as String? ?? "",
       createDate: json[NotesConstanse.createDate] as String? ?? "",
       color: Color(
@@ -35,8 +36,8 @@ class NotesModel {
     return {
       NotesConstanse.createDate: createDate,
       NotesConstanse.date: date,
-      NotesConstanse.description: text,
-      NotesConstanse.name: fullName,
+      NotesConstanse.description: title,
+      NotesConstanse.name: subTitle,
       NotesConstanse.color: color.value.toString(),
     };
   }
@@ -46,8 +47,8 @@ class NotesModel {
       NotesConstanse.id: id,
       NotesConstanse.createDate: createDate,
       NotesConstanse.date: date,
-      NotesConstanse.description: text,
-      NotesConstanse.name: fullName,
+      NotesConstanse.description: title,
+      NotesConstanse.name: subTitle,
       NotesConstanse.color: color.value.toString(),
     };
   }
@@ -55,8 +56,8 @@ class NotesModel {
   static NotesModel defaultModel() {
     return NotesModel(
       date: "",
-      fullName: "",
-      text: "",
+      title: "",
+      subTitle: "",
       createDate: "",
       color: Colors.white10,
     );
@@ -64,18 +65,18 @@ class NotesModel {
 
   NotesModel copyWith({
     String? date,
-    String? fullName,
+    String? title,
     int? id,
     String? createDate,
-    String? text,
+    String? subTitle,
     Color? color,
   }) {
     return NotesModel(
       color: color ?? this.color,
       id: id ?? this.id,
       date: date ?? this.date,
-      fullName: fullName ?? this.fullName,
-      text: text ?? this.text,
+      title: title ?? this.title,
+      subTitle: subTitle ?? this.subTitle,
       createDate: createDate ?? this.createDate,
     );
   }

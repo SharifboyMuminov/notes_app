@@ -12,6 +12,7 @@ showSaveQuestion(
   required VoidCallback onTabSave,
   required VoidCallback onTabDiscard,
   required String title,
+  bool isActiveSave = true,
 }) {
   showDialog(
     context: context,
@@ -38,10 +39,13 @@ showSaveQuestion(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DialogButton(
-                    title: "Discard",
-                    onTab: onTabDiscard,
-                    backgroundColor: AppColors.cFF0000),
+                  title: "Discard",
+                  onTab: onTabDiscard,
+                  backgroundColor: AppColors.cFF0000,
+                ),
+                10.getW(),
                 DialogButton(
+                  isActive: isActiveSave,
                   title: 'Save',
                   onTab: onTabSave,
                   backgroundColor: AppColors.c30BE71,

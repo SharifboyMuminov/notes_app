@@ -9,11 +9,13 @@ class DialogButton extends StatelessWidget {
     required this.title,
     required this.onTab,
     required this.backgroundColor,
+    this.isActive = true,
   });
 
   final String title;
   final VoidCallback onTab;
   final Color backgroundColor;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +23,12 @@ class DialogButton extends StatelessWidget {
       child: TextButton(
         style: TextButton.styleFrom(
           padding: EdgeInsets.symmetric(horizontal: 25.we, vertical: 7.he),
-          backgroundColor: backgroundColor,
+          backgroundColor:isActive ? backgroundColor : AppColors.c9A9A9A,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.r),
           ),
         ),
-        onPressed: onTab,
+        onPressed: isActive ? onTab : null,
         child: Text(
           title,
           style: TextStyle(

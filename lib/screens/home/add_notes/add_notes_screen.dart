@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mynotes/app/app.dart';
+import 'package:mynotes/bloc/notes/notes_bloc.dart';
+import 'package:mynotes/bloc/notes/notes_event.dart';
+import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/screens/home/dialogs/save_question_dialog.dart';
 import 'package:mynotes/screens/home/widget/main_icon_button.dart';
 import 'package:mynotes/screens/home/widget/text_from_file_sub_title.dart';
 import 'package:mynotes/screens/home/widget/text_from_file_title.dart';
+import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
 
@@ -14,6 +20,9 @@ class AddNotesScreen extends StatefulWidget {
 }
 
 class _AddNotesScreenState extends State<AddNotesScreen> {
+  final TextEditingController controllerTitle = TextEditingController();
+  final TextEditingController controllerSubTitle = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +32,20 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
           15.getW(),
           MainIconButton(
             onTab: () {
-              Navigator.pop(context);
+              if (_checkChanges()) {
+                showSaveQuestion(
+                  context,
+                  onTabSave: _onTabSave,
+                  onTabDiscard: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
+                  isActiveSave: _checkChanges(),
+                  title: _getTextForDialog(),
+                );
+              } else {
+                Navigator.pop(context);
+              }
             },
             iconPath: AppImages.arrowBackSvg,
           ),
@@ -32,9 +54,12 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
             onTab: () {
               showSaveQuestion(
                 context,
-                onTabSave: () {},
-                onTabDiscard: () {},
-                title: "O'zgarishlar saqlansinmi?",
+                onTabSave: _onTabSave,
+                onTabDiscard: () {
+                  Navigator.pop(context);
+                },
+                isActiveSave: _checkChanges(),
+                title: _getTextForDialog(),
               );
             },
             iconPath: AppImages.saveSvg,
@@ -46,12 +71,54 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
         padding: EdgeInsets.symmetric(horizontal: 15.we),
         child: Column(
           children: [
-            TextFromFileTitle(),
+            TextFromFileTitle(
+              controller: controllerTitle,
+            ),
             40.getH(),
-            TextFromFileSubTitle(),
+            TextFromFileSubTitle(
+              controller: controllerSubTitle,
+            ),
           ],
         ),
       ),
     );
+  }
+
+  bool _checkChanges() {
+    return controllerTitle.text.isNotEmpty &&
+        controllerSubTitle.text.isNotEmpty;
+  }
+
+  String _getTextForDialog() {
+    if (_checkChanges()) {
+      return "O'zgarishlar saqlansinmi?";
+    }
+
+    return "O'zgarishlar yoq yoki bo'sht :)";
+  }
+
+  void _onTabSave() {
+    context.read<NotesBloc>().add(
+      NotesAddEvent(
+        notesModel: NotesModel(
+          date: DateTime.now().toString(),
+          color: AppColors.c30BE71,
+          title: controllerTitle.text,
+          subTitle: controllerSubTitle.text,
+          createDate: DateTime.now().toString(),
+        ),
+      ),
+    );
+    Future.microtask(() {
+      Navigator.pop(context);
+      Navigator.pop(context);
+    });
+  }
+
+  @override
+  void dispose() {
+    controllerSubTitle.dispose();
+    controllerTitle.dispose();
+    super.dispose();
   }
 }

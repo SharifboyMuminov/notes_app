@@ -4,11 +4,14 @@ import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_text_style.dart';
 
 class TextFromFileSubTitle extends StatelessWidget {
-  const TextFromFileSubTitle({super.key});
+  const TextFromFileSubTitle({super.key, this.controller});
+
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       textInputAction: TextInputAction.done,
       maxLines: null,
       style: AppTextStyle.nunitoRegular.copyWith(

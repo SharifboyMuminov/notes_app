@@ -5,12 +5,16 @@ import 'package:mynotes/utils/app_size.dart';
 import 'package:mynotes/utils/app_text_style.dart';
 
 class TextFromFileTitle extends StatelessWidget {
-  const TextFromFileTitle({super.key});
+  const TextFromFileTitle({super.key, this.controller});
+
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      textInputAction: TextInputAction.done,
+      keyboardType: TextInputType.text,
+      controller: controller,
+      textInputAction: TextInputAction.next,
       maxLines: null,
       style: AppTextStyle.nunitoRegular.copyWith(
         fontSize: 48.sp,
