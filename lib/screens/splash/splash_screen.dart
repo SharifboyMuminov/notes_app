@@ -6,14 +6,14 @@ import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_size.dart';
 
 
-class SplashCreen extends StatefulWidget {
-  const SplashCreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<SplashCreen> createState() => _SplashCreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashCreenState extends State<SplashCreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // LocalDatabase.databaseInstance;
