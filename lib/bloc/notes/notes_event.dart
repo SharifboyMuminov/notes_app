@@ -1,1 +1,3 @@
-abstract class NotesEvent{}
+abstract class NotesEvent {}
+
+class NotesFetchEvent extends NotesEvent {}

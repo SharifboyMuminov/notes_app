@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mynotes/screens/add_notes/add_notes_screen.dart';
+import 'package:mynotes/screens/home/add_notes/add_notes_screen.dart';
 import 'package:mynotes/screens/home/widget/home_item.dart';
+import 'package:mynotes/screens/home/widget/main_icon_button.dart';
 import 'package:mynotes/screens/home/widget/my_floating_action_button.dart';
-import 'package:mynotes/screens/widget/main_icon_button.dart';
 import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
 import 'package:mynotes/utils/app_text_style.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mynotes/screens/dialogs/save_question_dialog.dart';
-import 'package:mynotes/screens/widget/text_from_file_sub_title.dart';
-import 'package:mynotes/screens/widget/text_from_file_title.dart';
-import 'package:mynotes/screens/widget/main_icon_button.dart';
+import 'package:mynotes/screens/home/dialogs/save_question_dialog.dart';
+import 'package:mynotes/screens/home/widget/main_icon_button.dart';
+import 'package:mynotes/screens/home/widget/text_from_file_sub_title.dart';
+import 'package:mynotes/screens/home/widget/text_from_file_title.dart';
 import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
 

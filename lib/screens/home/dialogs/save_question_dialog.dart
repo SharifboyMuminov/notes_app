@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mynotes/screens/widget/dialog_button.dart';
+import 'package:mynotes/screens/home/widget/dialog_button.dart';
 import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
