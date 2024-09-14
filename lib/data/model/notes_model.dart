@@ -36,8 +36,8 @@ class NotesModel {
     return {
       NotesConstanse.createDate: createDate,
       NotesConstanse.date: date,
-      NotesConstanse.description: title,
-      NotesConstanse.name: subTitle,
+      NotesConstanse.description: subTitle,
+      NotesConstanse.name: title,
       NotesConstanse.color: color.value.toString(),
     };
   }
@@ -47,8 +47,8 @@ class NotesModel {
       NotesConstanse.id: id,
       NotesConstanse.createDate: createDate,
       NotesConstanse.date: date,
-      NotesConstanse.description: title,
-      NotesConstanse.name: subTitle,
+      NotesConstanse.description: subTitle,
+      NotesConstanse.name: title,
       NotesConstanse.color: color.value.toString(),
     };
   }

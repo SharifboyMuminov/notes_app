@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mynotes/bloc/notes/notes_bloc.dart';
-import 'package:mynotes/bloc/notes/notes_event.dart';
 import 'package:mynotes/data/model/notes_model.dart';
+import 'package:mynotes/screens/home/add_notes/select_color_screen.dart';
 import 'package:mynotes/screens/home/dialogs/save_question_dialog.dart';
 import 'package:mynotes/screens/home/widget/main_icon_button.dart';
 import 'package:mynotes/screens/home/widget/text_from_file_sub_title.dart';
@@ -97,21 +95,38 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
   }
 
   void _onTabSave() {
-    context.read<NotesBloc>().add(
-      NotesAddEvent(
-        notesModel: NotesModel(
-          date: DateTime.now().toString(),
-          color: AppColors.c30BE71,
-          title: controllerTitle.text,
-          subTitle: controllerSubTitle.text,
-          createDate: DateTime.now().toString(),
-        ),
+    // context.read<NotesBloc>().add(
+    //       NotesAddEvent(
+    //         notesModel: NotesModel(
+    //           date: DateTime.now().toString(),
+    //           color: AppColors.c30BE71,
+    //           title: controllerTitle.text,
+    //           subTitle: controllerSubTitle.text,
+    //           createDate: DateTime.now().toString(),
+    //         ),
+    //       ),
+    //     );
+    // Future.microtask(() {
+    //   Navigator.pop(context);
+    //   Navigator.pop(context);
+    // });
+    NotesModel notesModel = NotesModel(
+      date: DateTime.now().toString(),
+      color: AppColors.c30BE71,
+      title: controllerTitle.text,
+      subTitle: controllerSubTitle.text,
+      createDate: DateTime.now().toString(),
+    );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return ColorScreen(
+            noteModel: notesModel,
+          );
+        },
       ),
     );
-    Future.microtask(() {
-      Navigator.pop(context);
-      Navigator.pop(context);
-    });
   }
 
   @override

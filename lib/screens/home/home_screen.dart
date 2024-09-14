@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           15.getW(),
           MainIconButton(
             onTab: () {},
-            iconPath: AppImages.noneNameSvg,
+            iconPath: AppImages.settingsSvg,
           ),
           15.getW(),
         ],
