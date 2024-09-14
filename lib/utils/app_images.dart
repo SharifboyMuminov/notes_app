@@ -9,4 +9,5 @@ class AppImages {
   static const String settingsSvg = "assets/icons/settings_icon.svg";
   static const String undovBlackSvg = "assets/icons/undov.svg";
   static const String emptyPng = "assets/images/empty.png";
+  static const String checkPng = "assets/images/check.png";
 }

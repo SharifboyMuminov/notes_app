@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mynotes/utils/app_colors.dart';
 
 List<Color> myColors = [
-  Colors.white10,
-  Colors.black45,
-  Colors.blueGrey,
+  AppColors.cFD99FF,
+  AppColors.cFF9E9E,
+  AppColors.c91F48F,
+  AppColors.cFFF599,
+  AppColors.c9EFFFF,
+  AppColors.cB69CFF,
   Colors.lightBlue,
   Colors.yellowAccent,
-  Colors.indigo,
   Colors.deepOrangeAccent,
-  Colors.brown,
-  Colors.deepPurpleAccent,
   Colors.purpleAccent,
-  Colors.orange,
-  Colors.red,
-  Colors.green,
-  Colors.indigo,
   Colors.lightGreenAccent,
 ];

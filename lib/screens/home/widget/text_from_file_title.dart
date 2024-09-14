@@ -13,6 +13,7 @@ class TextFromFileTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: TextInputType.text,
+      keyboardAppearance: Brightness.dark,
       controller: controller,
       textInputAction: TextInputAction.next,
       maxLines: null,

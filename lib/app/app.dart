@@ -43,6 +43,16 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             useMaterial3: true,
             scaffoldBackgroundColor: AppColors.c252525,
+            // inputDecorationTheme: InputDecorationTheme(
+            //   filled: true,
+            //   fillColor: Colors.grey[900], // Background color of the text field
+            //   hintStyle: TextStyle(color: Colors.grey), // Hint text color
+            // ),
+            // textSelectionTheme: TextSelectionThemeData(
+            //   cursorColor: Colors.black, // Cursor color
+            //   selectionColor: Colors.grey, // Selected text color
+            //   selectionHandleColor: Colors.blue, // Handle color
+            // ),
             appBarTheme: const AppBarTheme(
               backgroundColor: AppColors.c252525,
             ),

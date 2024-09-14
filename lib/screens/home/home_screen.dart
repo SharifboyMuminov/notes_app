@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           if (state.currentNotes.isEmpty) {
             return Padding(
-              padding:  EdgeInsets.only(bottom: 80.he),
+              padding: EdgeInsets.only(bottom: 80.he),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -86,12 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           return ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 15.we),
+            padding: EdgeInsets.only(left: 15.we, right: 15.we, bottom: 100.he),
             itemCount: state.currentNotes.length,
             itemBuilder: (BuildContext context, int index) {
               return HomeItem(
                 onTab: () {},
-                title: state.currentNotes[index].title,
+                notesModel: state.currentNotes[index],
               );
             },
           );

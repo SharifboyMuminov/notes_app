@@ -12,6 +12,7 @@ class TextFromFileSubTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      keyboardAppearance: Brightness.dark,
       textInputAction: TextInputAction.done,
       maxLines: null,
       style: AppTextStyle.nunitoRegular.copyWith(

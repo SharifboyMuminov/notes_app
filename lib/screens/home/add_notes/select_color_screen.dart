@@ -5,8 +5,10 @@ import 'package:mynotes/bloc/notes/notes_bloc.dart';
 import 'package:mynotes/bloc/notes/notes_event.dart';
 import 'package:mynotes/data/local/local_varibals.dart';
 import 'package:mynotes/data/model/notes_model.dart';
+import 'package:mynotes/screens/home/add_notes/widget/color_button.dart';
 import 'package:mynotes/screens/home/home_screen.dart';
 import 'package:mynotes/utils/app_colors.dart';
+import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
 
 class ColorScreen extends StatefulWidget {
@@ -19,8 +21,7 @@ class ColorScreen extends StatefulWidget {
 }
 
 class _ColorScreenState extends State<ColorScreen> {
-  double sliderValue = 20;
-  Color currentColor = myColors.first;
+  int currentColorIndex = 0;
   late NotesModel noteModel;
 
   @override
@@ -55,84 +56,22 @@ class _ColorScreenState extends State<ColorScreen> {
                     ),
                   ),
                   20.getH(),
-                  Container(
-                    width: width,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: currentColor.withOpacity(
-                        double.parse(
-                          "0.${sliderValue.toInt() < 10 ? "0" : ""}${sliderValue.toInt()}",
-                        ),
-                      ),
-                      borderRadius: BorderRadius.circular(5.r),
-                    ),
-                  ),
-                  20.getH(),
                   Wrap(
                     children: [
                       ...List.generate(
                         myColors.length,
                         (index) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 5.we,
-                              vertical: 5.he,
-                            ),
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: myColors[index],
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                              ),
-                              onPressed: () {
-                                currentColor = myColors[index];
-                                setState(() {});
-                              },
-                              child: SizedBox(
-                                width: 50.we,
-                                height: 50.we,
-                              ),
-                            ),
+                          return ColorButton(
+                            onTab: () {
+                              currentColorIndex = index;
+                              setState(() {});
+                            },
+                            color: myColors[index],
+                            isActive: currentColorIndex == index,
                           );
                         },
                       ),
                     ],
-                  ),
-                  20.getH(),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50.he,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.r),
-                        gradient: LinearGradient(
-                          colors: List.generate(
-                            99,
-                            (index) {
-                              return currentColor.withOpacity(
-                                double.parse(
-                                  "0.${index < 10 ? "0" : ""}$index",
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Slider.adaptive(
-                    thumbColor: Colors.white,
-                    activeColor: currentColor,
-                    inactiveColor: AppColors.white,
-                    value: sliderValue,
-                    max: 99,
-                    min: 5,
-                    onChanged: (v) {
-                      setState(() {
-                        sliderValue = v;
-                      });
-                    },
                   ),
                 ],
               ),
@@ -145,7 +84,7 @@ class _ColorScreenState extends State<ColorScreen> {
               child: TextButton(
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 15.he),
-                  backgroundColor: AppColors.c3B3B3B,
+                  backgroundColor: AppColors.c30BE71,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.r),
                   ),
@@ -172,11 +111,7 @@ class _ColorScreenState extends State<ColorScreen> {
 
     String nowDate = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
     noteModel = noteModel.copyWith(
-      color: currentColor.withOpacity(
-        double.parse(
-          "0.${sliderValue.toInt() < 10 ? "0" : ""}${sliderValue.toInt()}",
-        ),
-      ),
+      color: myColors[currentColorIndex],
       date: nowDate,
     );
     context.read<NotesBloc>().add(
