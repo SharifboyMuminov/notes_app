@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mynotes/data/local/storage_repository.dart';
+import 'package:mynotes/screens/home/home_screen.dart';
 import 'package:mynotes/screens/widget/passcode_item.dart';
 import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_images.dart';
@@ -189,7 +190,14 @@ class PinCodeScreenState extends State<MyPinCodeScreen> {
     if (currentPin.length != 4) {
       currentPin.add(value);
       if (currentPin.join() == truePinCode.join()) {
-        // Navigator.pushReplacementNamed(context, RouteNames.tabBox);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return const HomeScreen();
+            },
+          ),
+        );
       }
       setState(() {});
     }
