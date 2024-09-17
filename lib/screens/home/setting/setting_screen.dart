@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mynotes/screens/home/add_notes/add_notes_screen.dart';
+import 'package:mynotes/screens/home/setting/setting_passcode_screen.dart';
 import 'package:mynotes/screens/home/setting/widget/setting_item.dart';
 import 'package:mynotes/screens/home/widget/main_icon_button.dart';
 import 'package:mynotes/utils/app_colors.dart';
@@ -34,13 +35,26 @@ class _SettingScreenState extends State<SettingScreen> {
           iconPath: AppImages.arrowBackSvg,
         ),
       ),
-      body: Column(
-        children: [
-          SettingItem(
-            onTab: () {},
-            title: 'Passcode',
-          ),
-        ],
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15.we),
+        child: Column(
+          children: [
+            20.getH(),
+            SettingItem(
+              onTab: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return SettingPasscodeScreen();
+                    },
+                  ),
+                );
+              },
+              title: 'Passcode',
+            ),
+          ],
+        ),
       ),
     );
   }
