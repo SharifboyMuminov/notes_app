@@ -15,3 +15,9 @@ class NotesUpdateEvent extends NotesEvent {
 
   NotesUpdateEvent({required this.notesModel});
 }
+
+class NotesSearchEvent extends NotesEvent {
+  final String title;
+
+  NotesSearchEvent({required this.title});
+}

@@ -25,8 +25,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController controllerSearch = TextEditingController();
-
   bool isShowSearch = false;
 
   @override
@@ -40,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         toolbarHeight: 100.he,
         centerTitle: false,
@@ -52,7 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
         actions: [
-          // if (isShowSearch) 15.getW(),
           SearchTextFiled(
             onTab: () {
               setState(() {
@@ -60,7 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
               });
             },
             isShowSearch: isShowSearch,
-            controller: controllerSearch,
+            onChanged: (value) {
+              context.read<NotesBloc>().add(
+                    NotesSearchEvent(
+                      title: value,
+                    ),
+                  );
+            },
           ),
           15.getW(),
 
@@ -69,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
               if (isShowSearch) {
                 setState(() {
                   isShowSearch = !isShowSearch;
+                  FocusScope.of(context).unfocus();
                 });
               } else {
                 Navigator.push(
@@ -144,17 +149,11 @@ class _HomeScreenState extends State<HomeScreen> {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return AddNotesScreen();
+              return const AddNotesScreen();
             },
           ),
         );
       }),
     );
-  }
-
-  @override
-  void dispose() {
-    controllerSearch.dispose();
-    super.dispose();
   }
 }

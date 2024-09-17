@@ -11,12 +11,12 @@ class SearchTextFiled extends StatelessWidget {
     super.key,
     required this.onTab,
     required this.isShowSearch,
-    required this.controller,
+    required this.onChanged,
   });
 
   final VoidCallback onTab;
   final bool isShowSearch;
-  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class SearchTextFiled extends StatelessWidget {
             Expanded(
               child: TextFormField(
                 cursorColor: AppColors.white,
-                controller: controller,
+                onChanged: onChanged,
                 keyboardAppearance: Brightness.dark,
                 textInputAction: TextInputAction.done,
                 style: AppTextStyle.nunitoRegular.copyWith(

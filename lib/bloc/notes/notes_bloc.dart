@@ -10,6 +10,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     on<NotesFetchEvent>(_fetchNotes);
     on<NotesAddEvent>(_addNotes);
     on<NotesUpdateEvent>(_updateNotes);
+    on<NotesSearchEvent>(_searchNotes);
   }
 
   final LocalDatabase _localDatabase;
@@ -71,6 +72,34 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
           errorText: sqfliteResponse.errorText,
         ),
       );
+    }
+  }
+
+  Future<void> _searchNotes(
+      NotesSearchEvent notesSearchEvent, Emitter<NotesState> emit) async {
+    emit(state.copyWith(formStatus: FormStatus.loading));
+
+    if (notesSearchEvent.title.isNotEmpty) {
+      SqfliteResponse sqfliteResponse =
+          await _localDatabase.searchNotes(notesSearchEvent.title);
+
+      if (sqfliteResponse.errorText.isEmpty) {
+        emit(
+          state.copyWith(
+            formStatus: FormStatus.success,
+            allNotes: sqfliteResponse.data,
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            formStatus: FormStatus.error,
+            errorText: sqfliteResponse.errorText,
+          ),
+        );
+      }
+    } else {
+      add(NotesFetchEvent());
     }
   }
 }
