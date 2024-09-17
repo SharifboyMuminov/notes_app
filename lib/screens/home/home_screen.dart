@@ -7,6 +7,7 @@ import 'package:mynotes/bloc/notes/notes_state.dart';
 import 'package:mynotes/data/enums/form_status.dart';
 import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/screens/home/add_notes/add_notes_screen.dart';
+import 'package:mynotes/screens/home/setting/setting_screen.dart';
 import 'package:mynotes/screens/home/widget/home_item.dart';
 import 'package:mynotes/screens/home/widget/main_icon_button.dart';
 import 'package:mynotes/screens/home/widget/my_floating_action_button.dart';
@@ -50,7 +51,16 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           15.getW(),
           MainIconButton(
-            onTab: () {},
+            onTab: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SettingScreen();
+                  },
+                ),
+              );
+            },
             iconPath: AppImages.settingsSvg,
           ),
           15.getW(),
