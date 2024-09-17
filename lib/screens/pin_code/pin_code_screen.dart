@@ -16,14 +16,45 @@ class MyPinCodeScreen extends StatefulWidget {
   PinCodeScreenState createState() => PinCodeScreenState();
 }
 
-class PinCodeScreenState extends State<MyPinCodeScreen> {
-  List<String> currentPin = [];
-  int pinIndex = 0;
+class PinCodeScreenState extends State<MyPinCodeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation<Alignment> animationAlign;
 
   List<String> truePinCode = [];
+  List<String> currentPin = [];
+  int pinIndex = 0;
+  bool isStartAnimation = true;
+  Color currentColor = AppColors.white;
 
   @override
   void initState() {
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+      reverseDuration: const Duration(milliseconds: 500),
+    );
+
+    animationAlign = TweenSequence<Alignment>(
+      [
+        TweenSequenceItem<Alignment>(
+            tween: Tween(begin: Alignment.center, end: Alignment.centerLeft),
+            weight: 20),
+        TweenSequenceItem<Alignment>(
+            tween: Tween(begin: Alignment.centerLeft, end: Alignment.center),
+            weight: 20),
+        TweenSequenceItem<Alignment>(
+            tween: Tween(begin: Alignment.center, end: Alignment.centerRight),
+            weight: 20),
+        TweenSequenceItem<Alignment>(
+            tween: Tween(begin: Alignment.centerRight, end: Alignment.center),
+            weight: 20),
+      ],
+    ).animate(animationController);
+    animationController.addListener(() {
+      setState(() {});
+    });
+
     truePinCode = StorageRepository.getString(
       key: "pin_code",
     ).split("");
@@ -158,6 +189,7 @@ class PinCodeScreenState extends State<MyPinCodeScreen> {
                       onPressed: () {
                         if (currentPin.isNotEmpty) {
                           currentPin.removeLast();
+                          currentColor = AppColors.white;
                           setState(() {});
                         }
                       },
@@ -174,14 +206,17 @@ class PinCodeScreenState extends State<MyPinCodeScreen> {
   }
 
   buildPinRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(
-        4,
-        (index) {
-          return buildPinNumber(index);
-        },
+    return Align(
+      alignment: animationAlign.value,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: List.generate(
+          4,
+          (index) {
+            return buildPinNumber(index);
+          },
+        ),
       ),
     );
   }
@@ -198,8 +233,25 @@ class PinCodeScreenState extends State<MyPinCodeScreen> {
             },
           ),
         );
+      } else if (currentPin.length == 4) {
+        _startAnimation();
+      } else {
+        currentColor = AppColors.white;
       }
       setState(() {});
+    } else {
+      _startAnimation();
+    }
+  }
+
+  _startAnimation() {
+    currentColor = AppColors.cFF0000;
+    if (isStartAnimation) {
+      animationController.forward();
+      isStartAnimation = false;
+    } else {
+      animationController.reverse();
+      isStartAnimation = true;
     }
   }
 
@@ -207,7 +259,7 @@ class PinCodeScreenState extends State<MyPinCodeScreen> {
     return AnimatedContainer(
       padding: EdgeInsets.symmetric(horizontal: 8.we),
       decoration: BoxDecoration(
-        color: currentPin.length > index ? AppColors.white : AppColors.c3B3B3B,
+        color: currentPin.length > index ? currentColor : AppColors.c3B3B3B,
         shape: BoxShape.circle,
       ),
       duration: const Duration(milliseconds: 170),
