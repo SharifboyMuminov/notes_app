@@ -12,6 +12,7 @@ class AppImages {
   static const String clearSvg = "assets/icons/clear.svg";
   static const String arrowBackSvg = "assets/icons/arrow_back.svg";
   static const String arrowRightSvg = "assets/icons/arrow_right.svg";
+  static const String closeSvg = "assets/icons/close.svg";
 
 
 

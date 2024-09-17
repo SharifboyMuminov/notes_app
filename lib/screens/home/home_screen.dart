@@ -5,13 +5,13 @@ import 'package:mynotes/bloc/notes/notes_bloc.dart';
 import 'package:mynotes/bloc/notes/notes_event.dart';
 import 'package:mynotes/bloc/notes/notes_state.dart';
 import 'package:mynotes/data/enums/form_status.dart';
-import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/screens/home/add_notes/add_notes_screen.dart';
 import 'package:mynotes/screens/home/edit_notes/edit_notes_screen.dart';
 import 'package:mynotes/screens/home/setting/setting_screen.dart';
 import 'package:mynotes/screens/home/widget/home_item.dart';
 import 'package:mynotes/screens/home/widget/main_icon_button.dart';
 import 'package:mynotes/screens/home/widget/my_floating_action_button.dart';
+import 'package:mynotes/screens/home/widget/search_text_filed.dart';
 import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
@@ -25,6 +25,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController controllerSearch = TextEditingController();
+
+  bool isShowSearch = false;
+
   @override
   void initState() {
     Future.microtask(() {
@@ -39,32 +43,47 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         toolbarHeight: 100.he,
         centerTitle: false,
-        title: Text(
-          "Notes",
-          style: AppTextStyle.nunitoSemiBold.copyWith(
-            fontSize: 43.sp,
-          ),
-        ),
+        title: isShowSearch
+            ? null
+            : Text(
+                "Notes",
+                style: AppTextStyle.nunitoSemiBold.copyWith(
+                  fontSize: 43.sp,
+                ),
+              ),
         actions: [
-          MainIconButton(
-            onTab: () {},
-            iconPath: AppImages.searchSvg,
+          // if (isShowSearch) 15.getW(),
+          SearchTextFiled(
+            onTab: () {
+              setState(() {
+                isShowSearch = !isShowSearch;
+              });
+            },
+            isShowSearch: isShowSearch,
+            controller: controllerSearch,
           ),
           15.getW(),
+
           MainIconButton(
             onTab: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return SettingScreen();
-                  },
-                ),
-              );
+              if (isShowSearch) {
+                setState(() {
+                  isShowSearch = !isShowSearch;
+                });
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const SettingScreen();
+                    },
+                  ),
+                );
+              }
             },
-            iconPath: AppImages.settingsSvg,
+            iconPath: isShowSearch ? AppImages.closeSvg : AppImages.settingsSvg,
           ),
-          15.getW(),
+          // 15.getW(),
         ],
       ),
       body: BlocConsumer<NotesBloc, NotesState>(
@@ -131,5 +150,11 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }),
     );
+  }
+
+  @override
+  void dispose() {
+    controllerSearch.dispose();
+    super.dispose();
   }
 }
