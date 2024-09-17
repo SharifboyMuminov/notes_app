@@ -21,24 +21,34 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Settings",
-          style: AppTextStyle.nunitoMedium.copyWith(
-            fontSize: 17.sp,
-            color: AppColors.white,
-          ),
-        ),
-        leading: MainIconButton(
-          onTab: () => Navigator.pop(context),
-          iconPath: AppImages.arrowBackSvg,
-        ),
-      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.we),
         child: Column(
           children: [
+            30.getH(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MainIconButton(
+                  onTab: () => Navigator.pop(context),
+                  iconPath: AppImages.arrowBackSvg,
+                ),
+                Text(
+                  "Settings",
+                  style: AppTextStyle.nunitoMedium.copyWith(
+                    fontSize: 17.sp,
+                    color: AppColors.white,
+                  ),
+                ),
+                Text(
+                  "Settings",
+                  style: AppTextStyle.nunitoMedium.copyWith(
+                    fontSize: 17.sp,
+                    color: Colors.transparent,
+                  ),
+                ),
+              ],
+            ),
             20.getH(),
             SettingItem(
               onTab: () {
@@ -52,6 +62,20 @@ class _SettingScreenState extends State<SettingScreen> {
                 );
               },
               title: 'Passcode',
+            ),
+            15.getH(),
+            SettingItem(
+              onTab: () {
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) {
+                //       return SettingPasscodeScreen();
+                //     },
+                //   ),
+                // );
+              },
+              title: 'Language',
             ),
           ],
         ),

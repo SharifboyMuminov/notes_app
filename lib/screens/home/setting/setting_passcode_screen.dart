@@ -27,24 +27,34 @@ class _SettingPasscodeScreenState extends State<SettingPasscodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Account settings",
-          style: AppTextStyle.nunitoMedium.copyWith(
-            fontSize: 17.sp,
-            color: AppColors.white,
-          ),
-        ),
-        leading: MainIconButton(
-          onTab: () => Navigator.pop(context),
-          iconPath: AppImages.arrowBackSvg,
-        ),
-      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.we),
         child: Column(
           children: [
+            25.getH(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MainIconButton(
+                  onTab: () => Navigator.pop(context),
+                  iconPath: AppImages.arrowBackSvg,
+                ),
+                Text(
+                  "Settings passcode ",
+                  style: AppTextStyle.nunitoMedium.copyWith(
+                    fontSize: 17.sp,
+                    color: AppColors.white,
+                  ),
+                ),
+                Text(
+                  "ings",
+                  style: AppTextStyle.nunitoMedium.copyWith(
+                    fontSize: 17.sp,
+                    color: Colors.transparent,
+                  ),
+                ),
+              ],
+            ),
             38.getH(),
             TextButton(
               style: TextButton.styleFrom(
