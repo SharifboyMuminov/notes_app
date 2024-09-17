@@ -7,6 +7,7 @@ import 'package:mynotes/bloc/notes/notes_state.dart';
 import 'package:mynotes/data/enums/form_status.dart';
 import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/screens/home/add_notes/add_notes_screen.dart';
+import 'package:mynotes/screens/home/edit_notes/edit_notes_screen.dart';
 import 'package:mynotes/screens/home/setting/setting_screen.dart';
 import 'package:mynotes/screens/home/widget/home_item.dart';
 import 'package:mynotes/screens/home/widget/main_icon_button.dart';
@@ -100,7 +101,18 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: state.currentNotes.length,
             itemBuilder: (BuildContext context, int index) {
               return HomeItem(
-                onTab: () {},
+                onTab: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return EditNotesScreen(
+                          notesModel: state.currentNotes[index],
+                        );
+                      },
+                    ),
+                  );
+                },
                 notesModel: state.currentNotes[index],
               );
             },

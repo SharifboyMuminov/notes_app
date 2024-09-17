@@ -9,6 +9,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   NotesBloc(this._localDatabase) : super(NotesState.initial()) {
     on<NotesFetchEvent>(_fetchNotes);
     on<NotesAddEvent>(_addNotes);
+    on<NotesUpdateEvent>(_updateNotes);
   }
 
   final LocalDatabase _localDatabase;
@@ -41,6 +42,25 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
 
     SqfliteResponse sqfliteResponse =
         await _localDatabase.insertNotes(event.notesModel);
+
+    if (sqfliteResponse.errorText.isEmpty) {
+      add(NotesFetchEvent());
+    } else {
+      emit(
+        state.copyWith(
+          formStatus: FormStatus.error,
+          errorText: sqfliteResponse.errorText,
+        ),
+      );
+    }
+  }
+
+  Future<void> _updateNotes(NotesUpdateEvent event, emit) async {
+    emit(state.copyWith(formStatus: FormStatus.loading));
+
+    SqfliteResponse sqfliteResponse = await _localDatabase.updateNotes(
+      noteModel: event.notesModel,
+    );
 
     if (sqfliteResponse.errorText.isEmpty) {
       add(NotesFetchEvent());

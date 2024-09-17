@@ -9,3 +9,9 @@ class NotesAddEvent extends NotesEvent {
 
   NotesAddEvent({required this.notesModel});
 }
+
+class NotesUpdateEvent extends NotesEvent {
+  final NotesModel notesModel;
+
+  NotesUpdateEvent({required this.notesModel});
+}
