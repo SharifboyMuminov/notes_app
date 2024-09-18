@@ -23,7 +23,6 @@ class SearchTextFiled extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       width: isShowSearch ? (width - 90.we) : 50.we,
-      height: 62.he,
       duration: const Duration(milliseconds: 400),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.r),
@@ -34,6 +33,7 @@ class SearchTextFiled extends StatelessWidget {
           if (isShowSearch)
             Expanded(
               child: TextFormField(
+
                 cursorColor: AppColors.white,
                 onChanged: onChanged,
                 keyboardAppearance: Brightness.dark,
@@ -43,7 +43,7 @@ class SearchTextFiled extends StatelessWidget {
                   color: AppColors.white,
                 ),
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10.we),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10.we,vertical: 12.he),
                   hintText: "${"searching".tr()}...",
                   hintStyle: AppTextStyle.nunitoRegular.copyWith(
                     fontSize: 15.sp,
