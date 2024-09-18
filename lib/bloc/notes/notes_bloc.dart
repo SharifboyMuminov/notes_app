@@ -25,7 +25,6 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
         state.copyWith(
           formStatus: FormStatus.success,
           allNotes: sqfliteResponse.data,
-          currentNotes: sqfliteResponse.data,
         ),
       );
     } else {

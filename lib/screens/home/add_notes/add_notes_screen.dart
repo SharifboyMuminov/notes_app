@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/screens/home/add_notes/select_color_screen.dart';
@@ -88,28 +89,14 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
 
   String _getTextForDialog() {
     if (_checkChanges()) {
-      return "O'zgarishlar saqlansinmi?";
+      return "save_changes".tr();
     }
 
-    return "O'zgarishlar yoq yoki bo'sht :)";
+    return "empty_input".tr();
   }
 
   void _onTabSave() {
-    // context.read<NotesBloc>().add(
-    //       NotesAddEvent(
-    //         notesModel: NotesModel(
-    //           date: DateTime.now().toString(),
-    //           color: AppColors.c30BE71,
-    //           title: controllerTitle.text,
-    //           subTitle: controllerSubTitle.text,
-    //           createDate: DateTime.now().toString(),
-    //         ),
-    //       ),
-    //     );
-    // Future.microtask(() {
-    //   Navigator.pop(context);
-    //   Navigator.pop(context);
-    // });
+    FocusScope.of(context).unfocus();
     NotesModel notesModel = NotesModel(
       date: DateTime.now().toString(),
       color: AppColors.c30BE71,
@@ -117,16 +104,19 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
       subTitle: controllerSubTitle.text,
       createDate: DateTime.now().toString(),
     );
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return ColorScreen(
-            noteModel: notesModel,
-          );
-        },
-      ),
-    );
+    Navigator.pop(context);
+    Future.microtask(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return ColorScreen(
+              noteModel: notesModel,
+            );
+          },
+        ),
+      );
+    });
   }
 
   @override

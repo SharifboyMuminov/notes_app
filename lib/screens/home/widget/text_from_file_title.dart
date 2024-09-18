@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/utils/app_colors.dart';
@@ -25,7 +26,7 @@ class TextFromFileTitle extends StatelessWidget {
       cursorWidth: 3.we,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.zero,
-        hintText: "Title",
+        hintText: "title".tr(),
         hintStyle: AppTextStyle.nunitoRegular.copyWith(
           fontSize: 48.sp,
           color: AppColors.c9A9A9A,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,7 +74,10 @@ class _HomeScreenState extends State<HomeScreen> {
               if (isShowSearch) {
                 setState(() {
                   isShowSearch = !isShowSearch;
-                  FocusScope.of(context).unfocus();
+                  if (!isShowSearch) {
+                    context.read<NotesBloc>().add(NotesFetchEvent());
+                    FocusScope.of(context).unfocus();
+                  }
                 });
               } else {
                 Navigator.push(
@@ -83,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       return const SettingScreen();
                     },
                   ),
-                );
+                ).then((v) => setState(() {}));
               }
             },
             iconPath: isShowSearch ? AppImages.closeSvg : AppImages.settingsSvg,
@@ -97,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          if (state.currentNotes.isEmpty) {
+          if (state.allNotes.isEmpty) {
             return Padding(
               padding: EdgeInsets.only(bottom: 80.he),
               child: Column(
@@ -109,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   6.getH(),
                   Text(
-                    "Create your first note !",
+                    "create_notes".tr(),
                     style: AppTextStyle.nunitoLight.copyWith(
                       fontSize: 20.sp,
                       color: AppColors.white,
@@ -122,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           return ListView.builder(
             padding: EdgeInsets.only(left: 15.we, right: 15.we, bottom: 100.he),
-            itemCount: state.currentNotes.length,
+            itemCount: state.allNotes.length,
             itemBuilder: (BuildContext context, int index) {
               return HomeItem(
                 onTab: () {
@@ -131,13 +135,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     MaterialPageRoute(
                       builder: (context) {
                         return EditNotesScreen(
-                          notesModel: state.currentNotes[index],
+                          notesModel: state.allNotes[index],
                         );
                       },
                     ),
                   );
                 },
-                notesModel: state.currentNotes[index],
+                notesModel: state.allNotes[index],
               );
             },
           );

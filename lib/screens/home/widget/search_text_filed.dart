@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -23,7 +24,7 @@ class SearchTextFiled extends StatelessWidget {
     return AnimatedContainer(
       width: isShowSearch ? (width - 90.we) : 50.we,
       height: 62.he,
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 400),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.r),
         color: AppColors.c3B3B3B,
@@ -43,7 +44,7 @@ class SearchTextFiled extends StatelessWidget {
                 ),
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(horizontal: 10.we),
-                  hintText: "Searching...",
+                  hintText: "${"searching".tr()}...",
                   hintStyle: AppTextStyle.nunitoRegular.copyWith(
                     fontSize: 15.sp,
                   ),

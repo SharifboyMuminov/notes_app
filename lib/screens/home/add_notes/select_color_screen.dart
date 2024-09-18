@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +9,6 @@ import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/screens/home/add_notes/widget/color_button.dart';
 import 'package:mynotes/screens/home/home_screen.dart';
 import 'package:mynotes/utils/app_colors.dart';
-import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
 
 class ColorScreen extends StatefulWidget {
@@ -48,7 +48,7 @@ class _ColorScreenState extends State<ColorScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Choose a color",
+                    "choose_color".tr(),
                     style: TextStyle(
                       color: AppColors.white,
                       fontSize: 22.sp,
@@ -91,7 +91,7 @@ class _ColorScreenState extends State<ColorScreen> {
                 ),
                 onPressed: _onTabSave,
                 child: Text(
-                  "Save",
+                  "save".tr(),
                   style: TextStyle(
                     color: AppColors.white,
                     fontWeight: FontWeight.w500,

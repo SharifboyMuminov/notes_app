@@ -1,0 +1,20 @@
+{
+  "create_notes": "Birinchi eslatmani yarating!",
+  "settings": "Sozlamalar",
+  "passcode": "Parol",
+  "language": "Til",
+  "setting_passcode": "Parolni sozlash",
+  "use_pin": "Pindan foydalaning",
+  "enter_pin_code": "PIN kodni kiriting...",
+  "title": "Sarlavha",
+  "type_something": "Nimadir yozing...",
+  "empty_input": "O'zgarish yo'q yoki bo'sht :)",
+  "discard": "Tashlang",
+  "save": "Saqlash",
+  "save_changes": "O'zgarishlar saqlansinmi?",
+  "searching": "Qidirish",
+  "choose_color": "Rangni tanlang",
+  "uz": "O’zbek",
+  "en": "Inglizcha",
+  "ru": "Ruscha"
+}

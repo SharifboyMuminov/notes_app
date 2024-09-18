@@ -1,0 +1,20 @@
+{
+  "create_notes": "Create your first note !",
+  "settings": "Settings",
+  "passcode": "Passcode",
+  "language": "Language",
+  "setting_passcode": "Setting passcode",
+  "use_pin": "Use pin",
+  "enter_pin_code": "Enter the pin code...",
+  "title": "Title",
+  "type_something": "Type something...",
+  "empty_input": "No change or empty :)",
+  "discard": "Discard",
+  "save": "Save",
+  "save_changes": "Save changes?",
+  "searching": "Searching",
+  "choose_color": "Choose a color",
+  "uz": "Uzbek",
+  "en": "English",
+  "ru": "Russian"
+}

@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mynotes/screens/home/add_notes/add_notes_screen.dart';
-import 'package:mynotes/screens/home/setting/setting_passcode_screen.dart';
+import 'package:mynotes/screens/home/setting/setting_language/setting_language_screen.dart';
+import 'package:mynotes/screens/home/setting/setting_passcode/setting_passcode_screen.dart';
 import 'package:mynotes/screens/home/setting/widget/setting_item.dart';
 import 'package:mynotes/screens/home/widget/main_icon_button.dart';
 import 'package:mynotes/utils/app_colors.dart';
@@ -34,7 +34,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   iconPath: AppImages.arrowBackSvg,
                 ),
                 Text(
-                  "Settings",
+                  "settings".tr(),
                   style: AppTextStyle.nunitoMedium.copyWith(
                     fontSize: 17.sp,
                     color: AppColors.white,
@@ -56,26 +56,30 @@ class _SettingScreenState extends State<SettingScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return SettingPasscodeScreen();
+                      return const SettingPasscodeScreen();
                     },
                   ),
                 );
               },
-              title: 'Passcode',
+              title: 'passcode'.tr(),
             ),
             15.getH(),
             SettingItem(
               onTab: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) {
-                //       return SettingPasscodeScreen();
-                //     },
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return SettingLanguageScreen(
+                        onSet: () {
+                          setState(() {});
+                        },
+                      );
+                    },
+                  ),
+                );
               },
-              title: 'Language',
+              title: 'language'.tr(),
             ),
           ],
         ),

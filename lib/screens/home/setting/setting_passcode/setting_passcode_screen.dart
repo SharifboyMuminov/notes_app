@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/data/local/storage_repository.dart';
@@ -40,7 +41,7 @@ class _SettingPasscodeScreenState extends State<SettingPasscodeScreen> {
                   iconPath: AppImages.arrowBackSvg,
                 ),
                 Text(
-                  "Settings passcode ",
+                  "setting_passcode".tr(),
                   style: AppTextStyle.nunitoMedium.copyWith(
                     fontSize: 17.sp,
                     color: AppColors.white,

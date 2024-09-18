@@ -13,6 +13,10 @@ class AppImages {
   static const String arrowBackSvg = "assets/icons/arrow_back.svg";
   static const String arrowRightSvg = "assets/icons/arrow_right.svg";
   static const String closeSvg = "assets/icons/close.svg";
+  static const String americaFlagSvg = "assets/icons/america_flag.svg";
+  static const String russiaFlagSvg = "assets/icons/russia_flag.svg";
+  static const String uzbFlagSvg = "assets/icons/uzb_flag.svg";
+  static const String checkIconSvg = "assets/icons/check_icon.svg";
 
 
 

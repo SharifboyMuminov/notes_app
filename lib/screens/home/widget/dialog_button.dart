@@ -31,6 +31,7 @@ class DialogButton extends StatelessWidget {
         onPressed: isActive ? onTab : null,
         child: Text(
           title,
+          maxLines: 1,
           style: TextStyle(
             color: AppColors.white,
             fontSize: 18.sp,

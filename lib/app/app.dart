@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +24,16 @@ class App extends StatelessWidget {
             ),
           ),
         ],
-        child: const MyApp(),
+        child: EasyLocalization(
+          supportedLocales: const [
+            Locale('uz', 'UZ'),
+            Locale('ru', 'RU'),
+            Locale('en', 'EN'),
+          ],
+          path: 'assets/translations',
+          fallbackLocale: const Locale('uz', 'UZ'),
+          child: const MyApp(),
+        ),
       ),
     );
   }
@@ -40,19 +50,12 @@ class MyApp extends StatelessWidget {
         ScreenUtil.init(context);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
           theme: ThemeData(
             useMaterial3: true,
             scaffoldBackgroundColor: AppColors.c252525,
-            // inputDecorationTheme: InputDecorationTheme(
-            //   filled: true,
-            //   fillColor: Colors.grey[900], // Background color of the text field
-            //   hintStyle: TextStyle(color: Colors.grey), // Hint text color
-            // ),
-            // textSelectionTheme: TextSelectionThemeData(
-            //   cursorColor: Colors.black, // Cursor color
-            //   selectionColor: Colors.grey, // Selected text color
-            //   selectionHandleColor: Colors.blue, // Handle color
-            // ),
             appBarTheme: const AppBarTheme(
               backgroundColor: AppColors.c252525,
             ),

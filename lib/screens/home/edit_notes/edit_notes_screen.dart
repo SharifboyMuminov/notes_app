@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mynotes/bloc/notes/notes_bloc.dart';
@@ -110,11 +111,12 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
 
   String _getTextForDialog() {
     if (_checkChanges()) {
-      return "O'zgarishlar saqlansinmi?";
+      return "save_changes".tr();
     }
 
-    return "O'zgarishlar yoq yoki bo'sht :)";
+    return "empty_input".tr();
   }
+
 
   @override
   void dispose() {
