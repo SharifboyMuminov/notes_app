@@ -20,6 +20,7 @@ class AddNotesScreen extends StatefulWidget {
 class _AddNotesScreenState extends State<AddNotesScreen> {
   final TextEditingController controllerTitle = TextEditingController();
   final TextEditingController controllerSubTitle = TextEditingController();
+  final FocusNode _focusNodeSubTitle = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +76,7 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
             40.getH(),
             TextFromFileSubTitle(
               controller: controllerSubTitle,
+              focusNode: _focusNodeSubTitle,
             ),
           ],
         ),
@@ -96,6 +98,7 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
   }
 
   void _onTabSave() {
+    _focusNodeSubTitle.unfocus();
     FocusScope.of(context).unfocus();
     NotesModel notesModel = NotesModel(
       date: DateTime.now().toString(),
@@ -123,6 +126,7 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
   void dispose() {
     controllerSubTitle.dispose();
     controllerTitle.dispose();
+    _focusNodeSubTitle.dispose();
     super.dispose();
   }
 }

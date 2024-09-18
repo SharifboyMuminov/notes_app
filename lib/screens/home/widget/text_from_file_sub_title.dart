@@ -4,9 +4,10 @@ import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_text_style.dart';
 
 class TextFromFileSubTitle extends StatelessWidget {
-  const TextFromFileSubTitle({super.key, this.controller});
+  const TextFromFileSubTitle({super.key, this.controller, required this.focusNode});
 
   final TextEditingController? controller;
+  final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {

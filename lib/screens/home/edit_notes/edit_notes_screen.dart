@@ -23,6 +23,7 @@ class EditNotesScreen extends StatefulWidget {
 class _EditNotesScreenState extends State<EditNotesScreen> {
   final TextEditingController controllerTitle = TextEditingController();
   final TextEditingController controllerSubTitle = TextEditingController();
+  final FocusNode _focusNodeSubTitle = FocusNode();
 
   @override
   void initState() {
@@ -84,7 +85,7 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
             ),
             40.getH(),
             TextFromFileSubTitle(
-              controller: controllerSubTitle,
+              controller: controllerSubTitle, focusNode: _focusNodeSubTitle,
             ),
           ],
         ),
@@ -93,6 +94,7 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
   }
 
   void _onTabSave() {
+    _focusNodeSubTitle.unfocus();
     context.read<NotesBloc>().add(NotesUpdateEvent(
             notesModel: widget.notesModel.copyWith(
           title: controllerTitle.text,
@@ -122,6 +124,7 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
   void dispose() {
     controllerTitle.dispose();
     controllerSubTitle.dispose();
+    _focusNodeSubTitle.dispose();
     super.dispose();
   }
 }
