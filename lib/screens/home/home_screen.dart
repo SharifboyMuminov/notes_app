@@ -6,7 +6,9 @@ import 'package:mynotes/bloc/notes/notes_bloc.dart';
 import 'package:mynotes/bloc/notes/notes_event.dart';
 import 'package:mynotes/bloc/notes/notes_state.dart';
 import 'package:mynotes/data/enums/form_status.dart';
+import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/screens/home/add_notes/add_notes_screen.dart';
+import 'package:mynotes/screens/home/dialogs/save_question_dialog.dart';
 import 'package:mynotes/screens/home/edit_notes/edit_notes_screen.dart';
 import 'package:mynotes/screens/home/setting/setting_screen.dart';
 import 'package:mynotes/screens/home/widget/home_item.dart';
@@ -27,6 +29,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isShowSearch = false;
+  bool isShowCheck = false;
+  List<NotesModel> notesModels = [];
 
   @override
   void initState() {
@@ -53,10 +57,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
         actions: [
           SearchTextFiled(
+            iconPath:
+                isShowCheck ? AppImages.deleteAllSvg : AppImages.searchSvg,
             onTab: () {
-              setState(() {
+              if (isShowCheck) {
+                notesModels = [...context.read<NotesBloc>().state.allNotes];
+              } else {
                 isShowSearch = !isShowSearch;
-              });
+              }
+              setState(() {});
             },
             isShowSearch: isShowSearch,
             onChanged: (value) {
@@ -70,27 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
           15.getW(),
 
           MainIconButton(
-            onTab: () {
-              if (isShowSearch) {
-                setState(() {
-                  isShowSearch = !isShowSearch;
-                  if (!isShowSearch) {
-                    context.read<NotesBloc>().add(NotesFetchEvent());
-                    FocusScope.of(context).unfocus();
-                  }
-                });
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const SettingScreen();
-                    },
-                  ),
-                ).then((v) => setState(() {}));
-              }
-            },
-            iconPath: isShowSearch ? AppImages.closeSvg : AppImages.settingsSvg,
+            onTab: _onTabPopularIconButton,
+            iconPath: _getIconPathPopularIConButton(),
           ),
           // 15.getW(),
         ],
@@ -125,23 +115,25 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           return ListView.builder(
-            padding: EdgeInsets.only(left: 15.we, right: 15.we, bottom: 100.he),
+            padding: EdgeInsets.only(bottom: 100.he),
             itemCount: state.allNotes.length,
             itemBuilder: (BuildContext context, int index) {
               return HomeItem(
                 onTab: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return EditNotesScreen(
-                          notesModel: state.allNotes[index],
-                        );
-                      },
-                    ),
-                  );
+                  _onTabHomeItem(state.allNotes[index]);
                 },
                 notesModel: state.allNotes[index],
+                isShowCheck: isShowCheck,
+                checkValue: notesModels.contains(state.allNotes[index]),
+                onChangedCheck: (bool? value) {
+                  _addOrRemoveNotes(state.allNotes[index]);
+                },
+                onLongPress: () {
+                  setState(() {
+                    isShowCheck = true;
+                    _addOrRemoveNotes(state.allNotes[index]);
+                  });
+                },
               );
             },
           );
@@ -159,5 +151,97 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }),
     );
+  }
+
+  void _onTabHomeItem(NotesModel notesModel) {
+    if (isShowCheck) {
+      _addOrRemoveNotes(notesModel);
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return EditNotesScreen(
+              notesModel: notesModel,
+            );
+          },
+        ),
+      );
+    }
+  }
+
+  void _addOrRemoveNotes(NotesModel notesModel) {
+    if (notesModels.contains(notesModel)) {
+      notesModels.remove(notesModel);
+    } else {
+      notesModels.add(notesModel);
+    }
+    setState(() {});
+  }
+
+  String _getIconPathPopularIConButton() {
+    if (isShowSearch || (notesModels.isEmpty && isShowCheck)) {
+      return AppImages.closeSvg;
+    }
+    if (isShowCheck) {
+      return AppImages.deleteSvg;
+    }
+
+    return AppImages.settingsSvg;
+  }
+
+  void _onTabPopularIconButton() {
+    if (isShowSearch) {
+      setState(() {
+        isShowSearch = !isShowSearch;
+        if (!isShowSearch) {
+          context.read<NotesBloc>().add(NotesFetchEvent());
+          FocusScope.of(context).unfocus();
+        }
+      });
+    } else if (isShowCheck) {
+      if (notesModels.isNotEmpty) {
+        showSaveQuestion(
+          context,
+          onTabSave: () {
+            context
+                .read<NotesBloc>()
+                .add(NotesDeleteEvent(notesModels: notesModels));
+            setState(() {
+              notesModels = [];
+
+              isShowCheck = false;
+            });
+            Navigator.pop(context);
+          },
+          onTabDiscard: () {
+            setState(() {
+              notesModels = [];
+
+              isShowCheck = false;
+            });
+            Navigator.pop(context);
+          },
+          title: "delete_data".tr(),
+          discardTitle: "discard".tr(),
+          saveTitle: 'yes'.tr(),
+        );
+      } else {
+        setState(() {
+          notesModels = [];
+
+          isShowCheck = false;
+        });
+      }
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return const SettingScreen();
+          },
+        ),
+      ).then((v) => setState(() {}));
+    }
   }
 }

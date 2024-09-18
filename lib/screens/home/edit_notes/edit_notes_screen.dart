@@ -51,6 +51,8 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
                   },
                   isActiveSave: _checkChanges(),
                   title: _getTextForDialog(),
+                  discardTitle: "discard".tr(),
+                  saveTitle: 'save'.tr(),
                 );
               } else {
                 Navigator.pop(context);
@@ -69,6 +71,8 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
                 },
                 isActiveSave: _checkChanges(),
                 title: _getTextForDialog(),
+                discardTitle: "discard".tr(),
+                saveTitle: 'save'.tr(),
               );
             },
             iconPath: AppImages.saveSvg,

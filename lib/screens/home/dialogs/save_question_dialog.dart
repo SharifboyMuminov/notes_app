@@ -13,6 +13,8 @@ showSaveQuestion(
   required VoidCallback onTabSave,
   required VoidCallback onTabDiscard,
   required String title,
+  required String discardTitle,
+  required String saveTitle,
   bool isActiveSave = true,
 }) {
   showDialog(
@@ -47,7 +49,7 @@ showSaveQuestion(
                 10.getW(),
                 DialogButton(
                   isActive: isActiveSave,
-                  title: 'Save',
+                  title: 'save'.tr(),
                   onTab: onTabSave,
                   backgroundColor: AppColors.c30BE71,
                 ),

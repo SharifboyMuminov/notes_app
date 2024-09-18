@@ -11,6 +11,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     on<NotesAddEvent>(_addNotes);
     on<NotesUpdateEvent>(_updateNotes);
     on<NotesSearchEvent>(_searchNotes);
+    on<NotesDeleteEvent>(_deleteNotes);
   }
 
   final LocalDatabase _localDatabase;
@@ -99,6 +100,24 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       }
     } else {
       add(NotesFetchEvent());
+    }
+  }
+
+  Future<void> _deleteNotes(NotesDeleteEvent event, emit) async {
+    emit(state.copyWith(formStatus: FormStatus.loading));
+
+    SqfliteResponse sqfliteResponse =
+    await _localDatabase.deleteNotes(event.notesModels);
+
+    if (sqfliteResponse.errorText.isEmpty) {
+      add(NotesFetchEvent());
+    } else {
+      emit(
+        state.copyWith(
+          formStatus: FormStatus.error,
+          errorText: sqfliteResponse.errorText,
+        ),
+      );
     }
   }
 }

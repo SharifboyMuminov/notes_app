@@ -21,3 +21,9 @@ class NotesSearchEvent extends NotesEvent {
 
   NotesSearchEvent({required this.title});
 }
+
+class NotesDeleteEvent extends NotesEvent {
+  final List<NotesModel> notesModels;
+
+  NotesDeleteEvent({required this.notesModels});
+}

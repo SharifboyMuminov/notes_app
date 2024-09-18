@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mynotes/utils/app_colors.dart';
-import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
 import 'package:mynotes/utils/app_text_style.dart';
 
@@ -13,11 +12,13 @@ class SearchTextFiled extends StatelessWidget {
     required this.onTab,
     required this.isShowSearch,
     required this.onChanged,
+    required this.iconPath,
   });
 
   final VoidCallback onTab;
   final bool isShowSearch;
   final ValueChanged<String> onChanged;
+  final String iconPath;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class SearchTextFiled extends StatelessWidget {
                 ),
                 decoration: InputDecoration(
                   contentPadding:
-                      EdgeInsets.symmetric(horizontal: 10.we, vertical: 12.he),
+                      EdgeInsets.symmetric(horizontal: 10.we, vertical: 14.he),
                   hintText: "${"searching".tr()}...",
                   hintStyle: AppTextStyle.nunitoRegular.copyWith(
                     fontSize: 15.sp,
@@ -70,7 +71,7 @@ class SearchTextFiled extends StatelessWidget {
               ),
               onPressed: onTab,
               icon: SvgPicture.asset(
-                AppImages.searchSvg,
+                iconPath,
                 width: 24.we,
                 height: 24.we,
                 colorFilter: const ColorFilter.mode(

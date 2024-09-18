@@ -41,6 +41,8 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
                   },
                   isActiveSave: _checkChanges(),
                   title: _getTextForDialog(),
+                  discardTitle: "discard".tr(),
+                  saveTitle: 'save'.tr(),
                 );
               } else {
                 Navigator.pop(context);
@@ -59,6 +61,8 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
                 },
                 isActiveSave: _checkChanges(),
                 title: _getTextForDialog(),
+                discardTitle: "discard".tr(),
+                saveTitle: 'save'.tr(),
               );
             },
             iconPath: AppImages.saveSvg,
