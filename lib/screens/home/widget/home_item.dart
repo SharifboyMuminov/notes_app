@@ -29,7 +29,7 @@ class HomeItem extends StatelessWidget {
       children: [
         AnimatedContainer(
           width: double.infinity,
-          duration: const Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 250),
           padding: EdgeInsets.only(
             top: 12.he,
             bottom: 12.he,
@@ -55,7 +55,7 @@ class HomeItem extends StatelessWidget {
         ),
         AnimatedOpacity(
           opacity: isShowCheck ? 1 : 0,
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 400),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Padding(

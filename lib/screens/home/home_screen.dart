@@ -72,27 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           15.getW(),
           MainIconButton(
-            onTab: () {
-              if (isShowSearch) {
-                setState(() {
-                  isShowSearch = !isShowSearch;
-                  if (!isShowSearch) {
-                    context.read<NotesBloc>().add(NotesFetchEvent());
-                    FocusScope.of(context).unfocus();
-                  }
-                });
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const SettingScreen();
-                    },
-                  ),
-                ).then((v) => setState(() {}));
-              }
-            },
-            iconPath: isShowSearch ? AppImages.closeSvg : AppImages.settingsSvg,
+            onTab: _onTabPopularIconButton,
+            iconPath: _getIconPathPopularIConButton(),
           ),
           15.getW(),
         ],
@@ -150,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onLongPress: () {
                   setState(() {
                     isShowCheck = true;
+                    _addOrRemoveNotes(state.allNotes[index]);
                   });
                 },
               );
@@ -173,12 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onTabHomeItem(NotesModel notesModel) {
     if (isShowCheck) {
-      if (notesModels.contains(notesModel)) {
-        notesModels.remove(notesModel);
-      } else {
-        notesModels.add(notesModel);
-      }
-      setState(() {});
+      _addOrRemoveNotes(notesModel);
     } else {
       Navigator.push(
         context,
@@ -190,6 +167,57 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       );
+    }
+  }
+
+  void _addOrRemoveNotes(NotesModel notesModel) {
+    if (notesModels.contains(notesModel)) {
+      notesModels.remove(notesModel);
+    } else {
+      notesModels.add(notesModel);
+    }
+    setState(() {});
+  }
+
+  String _getIconPathPopularIConButton() {
+    if (isShowSearch || (notesModels.isEmpty && isShowCheck)) {
+      return AppImages.closeSvg;
+    }
+    if (isShowCheck) {
+      return AppImages.deleteSvg;
+    }
+
+    return AppImages.settingsSvg;
+  }
+
+  void _onTabPopularIconButton() {
+    if (isShowSearch) {
+      setState(() {
+        isShowSearch = !isShowSearch;
+        if (!isShowSearch) {
+          context.read<NotesBloc>().add(NotesFetchEvent());
+          FocusScope.of(context).unfocus();
+        }
+      });
+    } else if (isShowCheck) {
+      setState(() {
+        isShowCheck = false;
+      });
+      if (notesModels.isNotEmpty) {
+        context
+            .read<NotesBloc>()
+            .add(NotesDeleteEvent(notesModels: notesModels));
+        notesModels = [];
+      }
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return const SettingScreen();
+          },
+        ),
+      ).then((v) => setState(() {}));
     }
   }
 }

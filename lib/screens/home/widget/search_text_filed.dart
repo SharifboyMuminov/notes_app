@@ -24,7 +24,7 @@ class SearchTextFiled extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       width: isShowSearch ? (width - 90.we) : 50.we,
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.r),
         color: AppColors.c3B3B3B,
