@@ -20,33 +20,29 @@ class SettingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
-        color: AppColors.c3B3B3B,
-      ),
-      child: CupertinoButton(
-        padding: EdgeInsets.symmetric(vertical: 20.he, horizontal: 16.we),
-        onPressed: onTab,
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyle.nunitoMedium.copyWith(
-                  fontSize: 17.sp,
-                  color: titleColor ?? AppColors.white,
-                ),
+    return CupertinoButton(
+      borderRadius: BorderRadius.circular(10.r),
+      color: AppColors.c3B3B3B,
+      padding: EdgeInsets.symmetric(vertical: 20.he, horizontal: 16.we),
+      onPressed: onTab,
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyle.nunitoMedium.copyWith(
+                fontSize: 17.sp,
+                color: titleColor ?? AppColors.white,
               ),
             ),
-            SvgPicture.asset(
-              AppImages.arrowRightSvg,
-              width: 24.we,
-            ),
-          ],
-        ),
+          ),
+          SvgPicture.asset(
+            AppImages.arrowRightSvg,
+            width: 24.we,
+          ),
+        ],
       ),
     );
   }

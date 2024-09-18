@@ -22,45 +22,41 @@ class LanguageMyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
-        color: AppColors.c3B3B3B,
-      ),
-      child: CupertinoButton(
-        padding: EdgeInsets.symmetric(vertical: 16.he, horizontal: 20.we),
-        onPressed: onTab,
-        child: Row(
-          children: [
+    return CupertinoButton(
+      borderRadius: BorderRadius.circular(10.r),
+      color: AppColors.c3B3B3B,
+      padding: EdgeInsets.symmetric(vertical: 16.he, horizontal: 20.we),
+      onPressed: onTab,
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            iconPath,
+            width: 24.we,
+            height: 24.we,
+          ),
+          20.getW(),
+          Expanded(
+            child: Text(
+              title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyle.nunitoSemiBold.copyWith(
+                fontSize: 16.sp,
+                color: AppColors.white,
+              ),
+            ),
+          ),
+          if (active)
             SvgPicture.asset(
-              iconPath,
-              width: 24.we,
-              height: 24.we,
-            ),
-            20.getW(),
-            Expanded(
-              child: Text(
-                title,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyle.nunitoSemiBold.copyWith(
-                  fontSize: 16.sp,
-                  color: AppColors.white,
-                ),
+              AppImages.checkIconSvg,
+              width: 16.we,
+              height: 14.we,
+              colorFilter: const ColorFilter.mode(
+                AppColors.white,
+                BlendMode.srcIn,
               ),
             ),
-            if (active)
-              SvgPicture.asset(
-                AppImages.checkIconSvg,
-                width: 16.we,
-                height: 14.we,
-                colorFilter: const ColorFilter.mode(
-                  AppColors.white,
-                  BlendMode.srcIn,
-                ),
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }

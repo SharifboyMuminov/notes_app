@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/utils/app_colors.dart';
-import 'package:mynotes/utils/app_size.dart';
 import 'package:mynotes/utils/app_text_style.dart';
 
 class PasscodeItem extends StatelessWidget {
@@ -32,6 +30,7 @@ class PasscodeItem extends StatelessWidget {
           ],
         ),
         child: CupertinoButton(
+          borderRadius: BorderRadius.circular(5.r),
           onPressed: onTab,
           child: Text(
             title,

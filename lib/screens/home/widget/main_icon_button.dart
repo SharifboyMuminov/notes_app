@@ -16,21 +16,17 @@ class MainIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.r),
-        color: AppColors.c3B3B3B,
-      ),
-      child: CupertinoButton(
-        onPressed: onTab,
-        child: SvgPicture.asset(
-          iconPath,
-          width: 24.we,
-          height: 24.we,
-          colorFilter: const ColorFilter.mode(
-            AppColors.white,
-            BlendMode.srcIn,
-          ),
+    return CupertinoButton(
+      borderRadius: BorderRadius.circular(15.r),
+      color: AppColors.c3B3B3B,
+      onPressed: onTab,
+      child: SvgPicture.asset(
+        iconPath,
+        width: 24.we,
+        height: 24.we,
+        colorFilter: const ColorFilter.mode(
+          AppColors.white,
+          BlendMode.srcIn,
         ),
       ),
     );

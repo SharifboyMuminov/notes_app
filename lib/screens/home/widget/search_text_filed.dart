@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,7 +34,6 @@ class SearchTextFiled extends StatelessWidget {
           if (isShowSearch)
             Expanded(
               child: TextFormField(
-
                 cursorColor: AppColors.white,
                 onChanged: onChanged,
                 keyboardAppearance: Brightness.dark,
@@ -43,7 +43,8 @@ class SearchTextFiled extends StatelessWidget {
                   color: AppColors.white,
                 ),
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10.we,vertical: 12.he),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 10.we, vertical: 12.he),
                   hintText: "${"searching".tr()}...",
                   hintStyle: AppTextStyle.nunitoRegular.copyWith(
                     fontSize: 15.sp,
@@ -60,16 +61,12 @@ class SearchTextFiled extends StatelessWidget {
               ),
             ),
           if (!isShowSearch)
-            IconButton(
-              style: IconButton.styleFrom(
-                padding: EdgeInsets.all(13.we),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.r),
-                ),
-                backgroundColor: AppColors.c3B3B3B,
-              ),
+            CupertinoButton(
+              padding: EdgeInsets.all(13.we),
+              borderRadius: BorderRadius.circular(15.r),
+              color: AppColors.c3B3B3B,
               onPressed: onTab,
-              icon: SvgPicture.asset(
+              child: SvgPicture.asset(
                 AppImages.searchSvg,
                 width: 24.we,
                 height: 24.we,
