@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mynotes/utils/app_colors.dart';
@@ -22,45 +22,45 @@ class LanguageMyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 16.he, horizontal: 20.we),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        backgroundColor: AppColors.c3B3B3B,
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.r),
+        color: AppColors.c3B3B3B,
       ),
-      onPressed: onTab,
-      child: Row(
-        children: [
-          SvgPicture.asset(
-            iconPath,
-            width: 24.we,
-            height: 24.we,
-          ),
-          20.getW(),
-          Expanded(
-            child: Text(
-              title,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: AppTextStyle.nunitoSemiBold.copyWith(
-                fontSize: 16.sp,
-                color: AppColors.white,
-              ),
-            ),
-          ),
-          if (active)
+      child: CupertinoButton(
+        padding: EdgeInsets.symmetric(vertical: 16.he, horizontal: 20.we),
+        onPressed: onTab,
+        child: Row(
+          children: [
             SvgPicture.asset(
-              AppImages.checkIconSvg,
-              width: 16.we,
-              height: 14.we,
-              colorFilter: const ColorFilter.mode(
-                AppColors.white,
-                BlendMode.srcIn,
+              iconPath,
+              width: 24.we,
+              height: 24.we,
+            ),
+            20.getW(),
+            Expanded(
+              child: Text(
+                title,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyle.nunitoSemiBold.copyWith(
+                  fontSize: 16.sp,
+                  color: AppColors.white,
+                ),
               ),
             ),
-        ],
+            if (active)
+              SvgPicture.asset(
+                AppImages.checkIconSvg,
+                width: 16.we,
+                height: 14.we,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.white,
+                  BlendMode.srcIn,
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

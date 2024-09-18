@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/data/local/storage_repository.dart';
@@ -32,7 +33,7 @@ class _SettingPasscodeScreenState extends State<SettingPasscodeScreen> {
         padding: EdgeInsets.symmetric(horizontal: 15.we),
         child: Column(
           children: [
-            25.getH(),
+            45.getH(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -57,30 +58,25 @@ class _SettingPasscodeScreenState extends State<SettingPasscodeScreen> {
               ],
             ),
             38.getH(),
-            TextButton(
-              style: TextButton.styleFrom(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 16.we, vertical: 18.he),
-                backgroundColor: AppColors.c3B3B3B,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.r),
-                ),
-              ),
+            CupertinoButton(
+              padding: EdgeInsets.symmetric(horizontal: 16.we, vertical: 18.he),
+              borderRadius: BorderRadius.circular(15.r),
+              color: AppColors.c3B3B3B,
               onPressed: _onTabUsePin,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Use pin",
+                    "use_pin".tr(),
                     style: AppTextStyle.nunitoMedium.copyWith(
                       fontSize: 17.sp,
                       color: AppColors.white,
                     ),
                   ),
-                  Switch(
+                  CupertinoSwitch(
                     activeColor: AppColors.white,
-                    inactiveThumbColor: AppColors.c252525,
-                    inactiveTrackColor: AppColors.c3B3B3B,
+                    thumbColor: AppColors.white,
+                    trackColor: AppColors.c252525,
                     value: isActivePasscode,
                     onChanged: (bool value) {
                       _onTabUsePin();

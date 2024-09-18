@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             iconPath: isShowSearch ? AppImages.closeSvg : AppImages.settingsSvg,
           ),
-          // 15.getW(),
+          15.getW(),
         ],
       ),
       body: BlocConsumer<NotesBloc, NotesState>(

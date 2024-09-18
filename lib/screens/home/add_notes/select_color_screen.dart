@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +40,7 @@ class _ColorScreenState extends State<ColorScreen> {
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.only(
-                top: 40.he,
+                top: 60.he,
                 left: 10.we,
                 right: 10.we,
                 bottom: 60.he,
@@ -81,26 +82,27 @@ class _ColorScreenState extends State<ColorScreen> {
             width: double.infinity,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.we),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 15.he),
-                  backgroundColor: AppColors.c30BE71,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: AppColors.c30BE71,
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
-                onPressed: _onTabSave,
-                child: Text(
-                  "save".tr(),
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18.sp,
+                child: CupertinoButton(
+                  padding: EdgeInsets.symmetric(vertical: 15.he),
+                  onPressed: _onTabSave,
+                  child: Text(
+                    "save".tr(),
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18.sp,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
+          25.getH(),
         ],
       ),
     );

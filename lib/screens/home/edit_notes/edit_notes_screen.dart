@@ -37,6 +37,7 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100.he,
+        automaticallyImplyLeading: false,
         actions: [
           15.getW(),
           MainIconButton(
@@ -85,7 +86,8 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
             ),
             40.getH(),
             TextFromFileSubTitle(
-              controller: controllerSubTitle, focusNode: _focusNodeSubTitle,
+              controller: controllerSubTitle,
+              focusNode: _focusNodeSubTitle,
             ),
           ],
         ),
@@ -118,7 +120,6 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
 
     return "empty_input".tr();
   }
-
 
   @override
   void dispose() {

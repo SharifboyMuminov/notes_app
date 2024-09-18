@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_images.dart';
@@ -23,13 +23,8 @@ class ColorButton extends StatelessWidget {
         horizontal: 5.we,
         vertical: 5.we,
       ),
-      child: TextButton(
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-        ),
+      child: CupertinoButton(
+        padding: EdgeInsets.zero,
         onPressed: onTab,
         child: Stack(
           children: [

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/utils/app_colors.dart';
@@ -19,14 +19,10 @@ class HomeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12.he),
-      child: TextButton(
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: 30.he, horizontal: 50.we),
-          backgroundColor: notesModel.color,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-        ),
+      child: CupertinoButton(
+        padding: EdgeInsets.symmetric(vertical: 20.he, horizontal: 50.we),
+        color: notesModel.color,
+        borderRadius: BorderRadius.circular(10.r),
         onPressed: onTab,
         child: Text(
           notesModel.title,

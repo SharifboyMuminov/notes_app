@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/utils/app_colors.dart';
@@ -20,22 +21,22 @@ class DialogButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: TextButton(
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.symmetric(horizontal: 25.we, vertical: 7.he),
-          backgroundColor:isActive ? backgroundColor : AppColors.c9A9A9A,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.r),
-          ),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: isActive ? backgroundColor : AppColors.c9A9A9A,
+          borderRadius: BorderRadius.circular(5.r),
         ),
-        onPressed: isActive ? onTab : null,
-        child: Text(
-          title,
-          maxLines: 1,
-          style: TextStyle(
-            color: AppColors.white,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w400,
+        child: CupertinoButton(
+          padding: EdgeInsets.symmetric(horizontal: 25.we, vertical: 7.he),
+          onPressed: isActive ? onTab : null,
+          child: Text(
+            title,
+            maxLines: 1,
+            style: TextStyle(
+              color: AppColors.white,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w400,
+            ),
           ),
         ),
       ),

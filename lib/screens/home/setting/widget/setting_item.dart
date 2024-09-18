@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mynotes/utils/app_colors.dart';
@@ -21,33 +20,33 @@ class SettingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        padding: EdgeInsets.symmetric(vertical: 20.he, horizontal: 16.we),
-        backgroundColor: AppColors.c3B3B3B,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.r),
-        ),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.r),
+        color: AppColors.c3B3B3B,
       ),
-      onPressed: onTab,
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppTextStyle.nunitoMedium.copyWith(
-                fontSize: 17.sp,
-                color: titleColor ?? AppColors.white,
+      child: CupertinoButton(
+        padding: EdgeInsets.symmetric(vertical: 20.he, horizontal: 16.we),
+        onPressed: onTab,
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyle.nunitoMedium.copyWith(
+                  fontSize: 17.sp,
+                  color: titleColor ?? AppColors.white,
+                ),
               ),
             ),
-          ),
-          SvgPicture.asset(
-            AppImages.arrowRightSvg,
-            width: 24.we,
-          ),
-        ],
+            SvgPicture.asset(
+              AppImages.arrowRightSvg,
+              width: 24.we,
+            ),
+          ],
+        ),
       ),
     );
   }

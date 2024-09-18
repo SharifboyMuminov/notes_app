@@ -26,6 +26,7 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 100.he,
         actions: [
           15.getW(),

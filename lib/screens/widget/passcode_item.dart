@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/utils/app_colors.dart';
@@ -30,15 +31,7 @@ class PasscodeItem extends StatelessWidget {
             ),
           ],
         ),
-        child: TextButton(
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.only(bottom: 18.he, top: 6.he),
-            alignment: Alignment.topCenter,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.r),
-            ),
-            backgroundColor: AppColors.c3B3B3B,
-          ),
+        child: CupertinoButton(
           onPressed: onTab,
           child: Text(
             title,

@@ -30,22 +30,27 @@ class _SettingLanguageScreenState extends State<SettingLanguageScreen> {
   void _getCurrentLanguage() {
     Future.microtask(() {
       final locale = EasyLocalization.of(context)!.currentLocale;
-      if (locale!.languageCode == 'uz') {
+      _setCheck(locale!);
+      setState(() {});
+    });
+  }
+
+  _setCheck(Locale locale) {
+    setState(() {
+      if (locale.languageCode == 'uz') {
         currentLanguage = CurrentLanguage.uzbek;
       } else if (locale.languageCode == 'ru') {
         currentLanguage = CurrentLanguage.russia;
       } else {
         currentLanguage = CurrentLanguage.english;
       }
-      setState(() {});
     });
   }
 
   void _changeLanguage(Locale locale) {
-    setState(() {
-      EasyLocalization.of(context)!.setLocale(locale);
-      widget.onSet.call();
-    });
+    EasyLocalization.of(context)!.setLocale(locale);
+    _setCheck(locale);
+    widget.onSet.call();
   }
 
   @override
@@ -55,7 +60,7 @@ class _SettingLanguageScreenState extends State<SettingLanguageScreen> {
         padding: EdgeInsets.symmetric(horizontal: 15.we),
         child: Column(
           children: [
-            25.getH(),
+            45.getH(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -25,7 +25,7 @@ class _SettingScreenState extends State<SettingScreen> {
         padding: EdgeInsets.symmetric(horizontal: 15.we),
         child: Column(
           children: [
-            30.getH(),
+            50.getH(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
