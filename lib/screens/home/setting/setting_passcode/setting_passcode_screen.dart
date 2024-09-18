@@ -71,7 +71,7 @@ class _SettingPasscodeScreenState extends State<SettingPasscodeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Use pin",
+                    "use_pin".tr(),
                     style: AppTextStyle.nunitoMedium.copyWith(
                       fontSize: 17.sp,
                       color: AppColors.white,
