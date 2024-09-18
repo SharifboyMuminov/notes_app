@@ -8,6 +8,7 @@ import 'package:mynotes/bloc/notes/notes_state.dart';
 import 'package:mynotes/data/enums/form_status.dart';
 import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/screens/home/add_notes/add_notes_screen.dart';
+import 'package:mynotes/screens/home/dialogs/save_question_dialog.dart';
 import 'package:mynotes/screens/home/edit_notes/edit_notes_screen.dart';
 import 'package:mynotes/screens/home/setting/setting_screen.dart';
 import 'package:mynotes/screens/home/widget/home_item.dart';
@@ -57,9 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           SearchTextFiled(
             onTab: () {
-              setState(() {
+              if (isShowCheck) {
+                notesModels = [...context.read<NotesBloc>().state.allNotes];
+              } else {
                 isShowSearch = !isShowSearch;
-              });
+              }
+              setState(() {});
             },
             isShowSearch: isShowSearch,
             onChanged: (value) {
@@ -69,6 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
             },
+            iconPath:
+                isShowCheck ? AppImages.deleteAllSvg : AppImages.searchSvg,
           ),
           15.getW(),
           MainIconButton(
@@ -119,14 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 isShowCheck: isShowCheck,
                 checkValue: notesModels.contains(state.allNotes[index]),
                 onChangedCheck: (bool? value) {
-                  if (value != null) {
-                    if (value) {
-                      notesModels.add(state.allNotes[index]);
-                    } else {
-                      notesModels.remove(state.allNotes[index]);
-                    }
-                    setState(() {});
-                  }
+                  _addOrRemoveNotes(state.allNotes[index]);
                 },
                 onLongPress: () {
                   setState(() {
@@ -200,14 +199,38 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       });
     } else if (isShowCheck) {
-      setState(() {
-        isShowCheck = false;
-      });
       if (notesModels.isNotEmpty) {
-        context
-            .read<NotesBloc>()
-            .add(NotesDeleteEvent(notesModels: notesModels));
-        notesModels = [];
+        showSaveQuestion(
+          context,
+          onTabSave: () {
+            context
+                .read<NotesBloc>()
+                .add(NotesDeleteEvent(notesModels: notesModels));
+            setState(() {
+              notesModels = [];
+
+              isShowCheck = false;
+            });
+            Navigator.pop(context);
+          },
+          onTabDiscard: () {
+            setState(() {
+              notesModels = [];
+
+              isShowCheck = false;
+            });
+            Navigator.pop(context);
+          },
+          title: "delete_data".tr(),
+          discardTitle: "discard".tr(),
+          saveTitle: 'yes'.tr(),
+        );
+      } else {
+        setState(() {
+          notesModels = [];
+
+          isShowCheck = false;
+        });
       }
     } else {
       Navigator.push(

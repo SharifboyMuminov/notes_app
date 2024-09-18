@@ -13,11 +13,12 @@ class SearchTextFiled extends StatelessWidget {
     super.key,
     required this.onTab,
     required this.isShowSearch,
-    required this.onChanged,
+    required this.onChanged, required this.iconPath,
   });
 
   final VoidCallback onTab;
   final bool isShowSearch;
+  final String iconPath;
   final ValueChanged<String> onChanged;
 
   @override
@@ -67,7 +68,7 @@ class SearchTextFiled extends StatelessWidget {
               color: AppColors.c3B3B3B,
               onPressed: onTab,
               child: SvgPicture.asset(
-                AppImages.searchSvg,
+                iconPath,
                 width: 24.we,
                 height: 24.we,
                 colorFilter: const ColorFilter.mode(

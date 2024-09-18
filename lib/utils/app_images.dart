@@ -18,6 +18,7 @@ class AppImages {
   static const String uzbFlagSvg = "assets/icons/uzb_flag.svg";
   static const String checkIconSvg = "assets/icons/check_icon.svg";
   static const String deleteSvg = "assets/icons/delete.svg";
+  static const String deleteAllSvg = "assets/icons/delete_all.svg";
 
 
 

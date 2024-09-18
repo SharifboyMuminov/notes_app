@@ -55,7 +55,7 @@ class HomeItem extends StatelessWidget {
         ),
         AnimatedOpacity(
           opacity: isShowCheck ? 1 : 0,
-          duration: const Duration(milliseconds: 400),
+          duration: const Duration(milliseconds: 300),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Padding(

@@ -109,7 +109,6 @@ class LocalDatabase {
 
     try {
       final db = await databaseInstance.database;
-      // debugPrint(noteModel.id.toString());
 
       myResponse.data = await db.update(
           NotesConstanse.tableName, noteModel.toJsonForUpdate(),
