@@ -6,6 +6,7 @@ import 'package:mynotes/bloc/notes/notes_bloc.dart';
 import 'package:mynotes/bloc/notes/notes_event.dart';
 import 'package:mynotes/bloc/notes/notes_state.dart';
 import 'package:mynotes/data/enums/form_status.dart';
+import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/screens/home/add_notes/add_notes_screen.dart';
 import 'package:mynotes/screens/home/edit_notes/edit_notes_screen.dart';
 import 'package:mynotes/screens/home/setting/setting_screen.dart';
@@ -27,6 +28,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isShowSearch = false;
+  bool isShowCheck = false;
+  List<NotesModel> notesModels = [];
 
   @override
   void initState() {
@@ -68,7 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           15.getW(),
-
           MainIconButton(
             onTab: () {
               if (isShowSearch) {
@@ -125,23 +127,31 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           return ListView.builder(
-            padding: EdgeInsets.only(left: 15.we, right: 15.we, bottom: 100.he),
+            padding: EdgeInsets.only(bottom: 100.he),
             itemCount: state.allNotes.length,
             itemBuilder: (BuildContext context, int index) {
               return HomeItem(
                 onTab: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return EditNotesScreen(
-                          notesModel: state.allNotes[index],
-                        );
-                      },
-                    ),
-                  );
+                  _onTabHomeItem(state.allNotes[index]);
                 },
                 notesModel: state.allNotes[index],
+                isShowCheck: isShowCheck,
+                checkValue: notesModels.contains(state.allNotes[index]),
+                onChangedCheck: (bool? value) {
+                  if (value != null) {
+                    if (value) {
+                      notesModels.add(state.allNotes[index]);
+                    } else {
+                      notesModels.remove(state.allNotes[index]);
+                    }
+                    setState(() {});
+                  }
+                },
+                onLongPress: () {
+                  setState(() {
+                    isShowCheck = true;
+                  });
+                },
               );
             },
           );
@@ -159,5 +169,27 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }),
     );
+  }
+
+  void _onTabHomeItem(NotesModel notesModel) {
+    if (isShowCheck) {
+      if (notesModels.contains(notesModel)) {
+        notesModels.remove(notesModel);
+      } else {
+        notesModels.add(notesModel);
+      }
+      setState(() {});
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return EditNotesScreen(
+              notesModel: notesModel,
+            );
+          },
+        ),
+      );
+    }
   }
 }

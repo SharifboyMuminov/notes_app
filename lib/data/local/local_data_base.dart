@@ -79,15 +79,23 @@ class LocalDatabase {
     return myResponse;
   }
 
-  Future<SqfliteResponse> deleteNotes(NotesModel noteModel) async {
+  Future<SqfliteResponse> deleteNotes(List<NotesModel> noteModels) async {
     SqfliteResponse myResponse = SqfliteResponse();
 
     try {
       final db = await databaseInstance.database;
+
+      // Extract the IDs from the noteModels list
+      List<int> noteIds = noteModels.map((note) => note.id!).toList();
+
+      // Create a placeholder string for the number of IDs
+      String placeholders = List.filled(noteIds.length, '?').join(',');
+
+      // Execute the delete query using the IN clause
       myResponse.data = await db.delete(
         NotesConstanse.tableName,
-        where: "${NotesConstanse.id} = ?",
-        whereArgs: [noteModel.id],
+        where: "${NotesConstanse.id} IN ($placeholders)",
+        whereArgs: noteIds,
       );
     } catch (error) {
       myResponse.errorText = error.toString();

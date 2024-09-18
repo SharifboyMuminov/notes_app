@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mynotes/utils/app_colors.dart';
@@ -16,11 +16,16 @@ class MainIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton(
-      borderRadius: BorderRadius.circular(15.r),
-      color: AppColors.c3B3B3B,
+    return IconButton(
+      style: IconButton.styleFrom(
+        padding: EdgeInsets.all(13.we),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.r),
+        ),
+        backgroundColor: AppColors.c3B3B3B,
+      ),
       onPressed: onTab,
-      child: SvgPicture.asset(
+      icon: SvgPicture.asset(
         iconPath,
         width: 24.we,
         height: 24.we,

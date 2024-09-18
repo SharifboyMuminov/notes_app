@@ -16,6 +16,12 @@ class NotesUpdateEvent extends NotesEvent {
   NotesUpdateEvent({required this.notesModel});
 }
 
+class NotesDeleteEvent extends NotesEvent {
+  final List<NotesModel> notesModels;
+
+  NotesDeleteEvent({required this.notesModels});
+}
+
 class NotesSearchEvent extends NotesEvent {
   final String title;
 
