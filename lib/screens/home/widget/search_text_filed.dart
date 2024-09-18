@@ -22,7 +22,6 @@ class SearchTextFiled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-
       width: isShowSearch ? (width - 90.we) : 50.we,
       duration: const Duration(milliseconds: 400),
       decoration: BoxDecoration(
