@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mynotes/utils/app_colors.dart';
-import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_size.dart';
 
 class MainIconButton extends StatelessWidget {
@@ -10,10 +9,12 @@ class MainIconButton extends StatelessWidget {
     super.key,
     required this.onTab,
     required this.iconPath,
+    this.colorSvg,
   });
 
   final VoidCallback onTab;
   final String iconPath;
+  final Color? colorSvg;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +31,8 @@ class MainIconButton extends StatelessWidget {
         iconPath,
         width: 24.we,
         height: 24.we,
-        colorFilter: const ColorFilter.mode(
-          AppColors.white,
+        colorFilter: ColorFilter.mode(
+          colorSvg ?? AppColors.white,
           BlendMode.srcIn,
         ),
       ),

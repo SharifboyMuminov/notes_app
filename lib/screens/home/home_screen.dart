@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onTab: _onTabPopularIconButton,
             iconPath: _getIconPathPopularIConButton(),
           ),
-          // 15.getW(),
+          15.getW(),
         ],
       ),
       body: BlocConsumer<NotesBloc, NotesState>(
@@ -129,10 +129,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   _addOrRemoveNotes(state.allNotes[index]);
                 },
                 onLongPress: () {
-                  setState(() {
-                    isShowCheck = true;
-                    _addOrRemoveNotes(state.allNotes[index]);
-                  });
+                  if (!isShowSearch) {
+                    setState(() {
+                      isShowCheck = true;
+                      _addOrRemoveNotes(state.allNotes[index]);
+                    });
+                  }
                 },
               );
             },
