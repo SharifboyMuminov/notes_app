@@ -92,7 +92,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
           if (state.allNotes.isEmpty) {
             return Padding(
-              padding: EdgeInsets.only(bottom: 80.he),
+              padding: EdgeInsets.only(
+                bottom: 80.he,
+                left: 10.we,
+                right: 10.we,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -103,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   6.getH(),
                   Text(
                     "create_notes".tr(),
+                    textAlign: TextAlign.center,
                     style: AppTextStyle.nunitoLight.copyWith(
                       fontSize: 20.sp,
                       color: AppColors.white,
