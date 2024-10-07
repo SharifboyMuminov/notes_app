@@ -133,10 +133,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   _addOrRemoveNotes(state.allNotes[index]);
                 },
                 onLongPress: () {
-                  setState(() {
-                    isShowCheck = true;
-                    _addOrRemoveNotes(state.allNotes[index]);
-                  });
+                  if (!isShowSearch) {
+                    setState(() {
+                      isShowCheck = true;
+                      _addOrRemoveNotes(state.allNotes[index]);
+                    });
+                  }
                 },
               );
             },

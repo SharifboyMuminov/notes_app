@@ -8,6 +8,7 @@ import 'package:mynotes/screens/home/dialogs/save_question_dialog.dart';
 import 'package:mynotes/screens/home/widget/main_icon_button.dart';
 import 'package:mynotes/screens/home/widget/text_from_file_sub_title.dart';
 import 'package:mynotes/screens/home/widget/text_from_file_title.dart';
+import 'package:mynotes/utils/app_colors.dart';
 import 'package:mynotes/utils/app_images.dart';
 import 'package:mynotes/utils/app_size.dart';
 
@@ -77,6 +78,29 @@ class _EditNotesScreenState extends State<EditNotesScreen> {
               );
             },
             iconPath: AppImages.saveSvg,
+          ),
+          15.getW(),
+          MainIconButton(
+            onTab: () {
+              showSaveQuestion(
+                context,
+                onTabSave: () {
+                  context
+                      .read<NotesBloc>()
+                      .add(NotesDeleteEvent(notesModels: [widget.notesModel]));
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                onTabDiscard: () {
+                  Navigator.pop(context);
+                },
+                title: "delete_data".tr(),
+                discardTitle: "discard".tr(),
+                saveTitle: 'yes'.tr(),
+              );
+            },
+            iconPath: AppImages.deleteSvg,
+            colorSvg: AppColors.cFF0000,
           ),
           15.getW(),
         ],

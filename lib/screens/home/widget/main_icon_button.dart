@@ -9,10 +9,12 @@ class MainIconButton extends StatelessWidget {
     super.key,
     required this.onTab,
     required this.iconPath,
+    this.colorSvg,
   });
 
   final VoidCallback onTab;
   final String iconPath;
+  final Color? colorSvg;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,8 @@ class MainIconButton extends StatelessWidget {
         iconPath,
         width: 24.we,
         height: 24.we,
-        colorFilter: const ColorFilter.mode(
-          AppColors.white,
+        colorFilter:  ColorFilter.mode(
+          colorSvg ?? AppColors.white,
           BlendMode.srcIn,
         ),
       ),
