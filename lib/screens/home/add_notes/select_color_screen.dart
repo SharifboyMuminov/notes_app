@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/bloc/notes/notes_bloc.dart';
 import 'package:mynotes/bloc/notes/notes_event.dart';
@@ -23,6 +24,8 @@ class ColorScreen extends StatefulWidget {
 class _ColorScreenState extends State<ColorScreen> {
   int currentColorIndex = 0;
   late NotesModel noteModel;
+
+  Color selectedColor = Colors.white;
 
   @override
   void initState() {
@@ -60,8 +63,40 @@ class _ColorScreenState extends State<ColorScreen> {
                     Wrap(
                       children: [
                         ...List.generate(
-                          myColors.length,
+                          myColors.length + 1,
                           (index) {
+                            if (index == myColors.length) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 5.we,
+                                  vertical: 5.we,
+                                ),
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: EdgeInsets.zero,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                  ),
+                                  onPressed: _shoColorPicker,
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: 60.we,
+                                    height: 60.we,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.c3B3B3B,
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                      size: 30.sp,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+
                             return ColorButton(
                               onTab: () {
                                 currentColorIndex = index;
@@ -105,6 +140,81 @@ class _ColorScreenState extends State<ColorScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _shoColorPicker() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: AppColors.c252525,
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(14),
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "choose_color".tr(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 22,
+                  ),
+                ),
+                20.getH(),
+                ColorPicker(
+                  pickerColor: selectedColor,
+                  onColorChanged: (color) {
+                    setState(() {
+                      selectedColor = color;
+                    });
+                  },
+                  enableAlpha: false,
+                  labelTypes: const [],
+                  pickerAreaBorderRadius:
+                      const BorderRadius.all(Radius.circular(8)),
+                ),
+                10.getH(),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 25.we,
+                      vertical: 10.he,
+                    ),
+                    backgroundColor: AppColors.c30BE71,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                  ),
+                  onPressed: () {
+                    myColors.add(selectedColor);
+                    currentColorIndex = myColors.length - 1;
+                    setState(() {});
+                    Navigator.pop(context);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "save".tr(),
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

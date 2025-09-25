@@ -32,6 +32,7 @@ class ColorButton extends StatelessWidget {
         ),
         onPressed: onTab,
         child: Stack(
+          alignment: AlignmentGeometry.center,
           children: [
             SizedBox(
               width: 60.we,
@@ -47,8 +48,8 @@ class ColorButton extends StatelessWidget {
               Image.asset(
                 AppImages.checkPng,
                 fit: BoxFit.cover,
-                width: 60.we,
-                height: 60.we,
+                width: 40.we,
+                height: 40.we,
               ),
             if (isActive)
               SizedBox(
@@ -56,7 +57,7 @@ class ColorButton extends StatelessWidget {
                 height: 60.we,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: AppColors.c3B3B3B.withOpacity(0.3),
+                    color: AppColors.c3B3B3B.withValues(alpha: 0.3),
                     borderRadius: BorderRadius.circular(10.r),
                   ),
                 ),
