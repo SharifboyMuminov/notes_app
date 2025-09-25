@@ -19,7 +19,7 @@ class TextFromFileTitle extends StatelessWidget {
       textInputAction: TextInputAction.next,
       maxLines: null,
       style: AppTextStyle.nunitoRegular.copyWith(
-        fontSize: 48.sp,
+        fontSize: 20.sp,
         color: AppColors.white,
       ),
       cursorColor: AppColors.white,
@@ -28,7 +28,7 @@ class TextFromFileTitle extends StatelessWidget {
         contentPadding: EdgeInsets.zero,
         hintText: "title".tr(),
         hintStyle: AppTextStyle.nunitoRegular.copyWith(
-          fontSize: 48.sp,
+          fontSize: 20.sp,
           color: AppColors.c9A9A9A,
         ),
         focusedBorder: const OutlineInputBorder(

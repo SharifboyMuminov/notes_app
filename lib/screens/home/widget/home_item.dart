@@ -52,7 +52,7 @@ class HomeItem extends StatelessWidget {
               child: Text(
                 notesModel.title,
                 style: AppTextStyle.nunitoMedium.copyWith(
-                  fontSize: 25.sp,
+                  fontSize: 16.sp,
                   color: AppColors.black,
                 ),
               ),

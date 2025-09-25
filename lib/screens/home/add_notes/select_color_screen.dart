@@ -34,74 +34,76 @@ class _ColorScreenState extends State<ColorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.c252525,
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.only(
-                top: 40.he,
-                left: 10.we,
-                right: 10.we,
-                bottom: 60.he,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(
+                  top: 20.he,
+                  left: 10.we,
+                  right: 10.we,
+                  bottom: 10.he,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "choose_color".tr(),
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    20.getH(),
+                    Wrap(
+                      children: [
+                        ...List.generate(
+                          myColors.length,
+                          (index) {
+                            return ColorButton(
+                              onTab: () {
+                                currentColorIndex = index;
+                                setState(() {});
+                              },
+                              color: myColors[index],
+                              isActive: currentColorIndex == index,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "choose_color".tr(),
-                    style: TextStyle(
-                      color: AppColors.white,
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w600,
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.we),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 15.he),
+                    backgroundColor: AppColors.c30BE71,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
                   ),
-                  20.getH(),
-                  Wrap(
-                    children: [
-                      ...List.generate(
-                        myColors.length,
-                        (index) {
-                          return ColorButton(
-                            onTab: () {
-                              currentColorIndex = index;
-                              setState(() {});
-                            },
-                            color: myColors[index],
-                            isActive: currentColorIndex == index,
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.we),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 15.he),
-                  backgroundColor: AppColors.c30BE71,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                ),
-                onPressed: _onTabSave,
-                child: Text(
-                  "save".tr(),
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18.sp,
+                  onPressed: _onTabSave,
+                  child: Text(
+                    "save".tr(),
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18.sp,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

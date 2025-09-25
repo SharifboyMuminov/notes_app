@@ -45,14 +45,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        toolbarHeight: 100.he,
+        backgroundColor: Colors.transparent,
+        toolbarHeight: 90.he,
         centerTitle: false,
         title: isShowSearch
             ? null
             : Text(
-                "Notes",
+                "notes".tr(),
                 style: AppTextStyle.nunitoSemiBold.copyWith(
-                  fontSize: 43.sp,
+                  fontSize: 24.sp,
                 ),
               ),
         actions: [
@@ -77,7 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           15.getW(),
-
           MainIconButton(
             onTab: _onTabPopularIconButton,
             iconPath: _getIconPathPopularIConButton(),

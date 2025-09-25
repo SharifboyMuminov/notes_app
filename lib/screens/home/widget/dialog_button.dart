@@ -34,7 +34,7 @@ class DialogButton extends StatelessWidget {
           maxLines: 1,
           style: TextStyle(
             color: AppColors.white,
-            fontSize: 18.sp,
+            fontSize: 14.sp,
             fontWeight: FontWeight.w400,
           ),
         ),

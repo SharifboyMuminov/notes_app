@@ -23,16 +23,15 @@ class SearchTextFiled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      width: isShowSearch ? (width - 90.we) : 50.we,
-      duration: const Duration(milliseconds: 400),
+      width: isShowSearch ? (width - 100) : 50,
+      height: 50,
+      duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.r),
         color: AppColors.c3B3B3B,
       ),
-      child: Row(
-        children: [
-          if (isShowSearch)
-            Expanded(
+      child: isShowSearch
+          ? Expanded(
               child: TextFormField(
                 cursorColor: AppColors.white,
                 onChanged: onChanged,
@@ -59,9 +58,8 @@ class SearchTextFiled extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          if (!isShowSearch)
-            IconButton(
+            )
+          : IconButton(
               style: IconButton.styleFrom(
                 padding: EdgeInsets.all(13.we),
                 shape: RoundedRectangleBorder(
@@ -80,8 +78,6 @@ class SearchTextFiled extends StatelessWidget {
                 ),
               ),
             ),
-        ],
-      ),
     );
   }
 }

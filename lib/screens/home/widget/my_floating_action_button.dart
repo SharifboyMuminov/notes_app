@@ -13,8 +13,8 @@ class MyFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 70.we,
-      height: 70.we,
+      width: 65.we,
+      height: 65.we,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: AppColors.c252525,
