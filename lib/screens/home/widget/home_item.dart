@@ -53,7 +53,11 @@ class HomeItem extends StatelessWidget {
                 notesModel.title,
                 style: AppTextStyle.nunitoMedium.copyWith(
                   fontSize: 16.sp,
-                  color: AppColors.black,
+                  color:
+                      ThemeData.estimateBrightnessForColor(notesModel.color) ==
+                              Brightness.light
+                          ? AppColors.black // oq fon bo‘lsa qora matn
+                          : AppColors.white, // qora fon bo‘lsa oq matn
                 ),
               ),
             ),
