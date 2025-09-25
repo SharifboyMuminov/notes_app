@@ -11,6 +11,7 @@ import 'package:mynotes/screens/home/add_notes/add_notes_screen.dart';
 import 'package:mynotes/screens/home/dialogs/save_question_dialog.dart';
 import 'package:mynotes/screens/home/edit_notes/edit_notes_screen.dart';
 import 'package:mynotes/screens/home/setting/setting_screen.dart';
+import 'package:mynotes/screens/home/widget/category_delegate.dart';
 import 'package:mynotes/screens/home/widget/home_item.dart';
 import 'package:mynotes/screens/home/widget/main_icon_button.dart';
 import 'package:mynotes/screens/home/widget/my_floating_action_button.dart';
@@ -31,6 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isShowSearch = false;
   bool isShowCheck = false;
   List<NotesModel> notesModels = [];
+  int _activeIndex = 0;
+
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -38,6 +42,33 @@ class _HomeScreenState extends State<HomeScreen> {
       context.read<NotesBloc>().add(NotesFetchEvent());
     });
     super.initState();
+  }
+
+  final List<GlobalKey> _itemKeys = List.generate(20, (_) => GlobalKey());
+
+  void scrollToCenter(int index) {
+    final keyContext = _itemKeys[index].currentContext;
+    if (keyContext != null) {
+      final box = keyContext.findRenderObject() as RenderBox;
+      final position =
+          box.localToGlobal(Offset.zero, ancestor: context.findRenderObject());
+      final size = box.size;
+
+      final screenWidth = MediaQuery.of(context).size.width;
+      final targetOffset = _scrollController.offset +
+          position.dx +
+          size.width / 2 -
+          screenWidth / 2;
+
+      _scrollController.animateTo(
+        targetOffset.clamp(
+          0.0,
+          _scrollController.position.maxScrollExtent,
+        ),
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
   @override
@@ -114,30 +145,50 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
 
-          return ListView.builder(
-            padding: EdgeInsets.only(bottom: 100.he),
-            itemCount: state.allNotes.length,
-            itemBuilder: (BuildContext context, int index) {
-              return HomeItem(
-                onTab: () {
-                  _onTabHomeItem(state.allNotes[index]);
-                },
-                notesModel: state.allNotes[index],
-                isShowCheck: isShowCheck,
-                checkValue: notesModels.contains(state.allNotes[index]),
-                onChangedCheck: (bool? value) {
-                  _addOrRemoveNotes(state.allNotes[index]);
-                },
-                onLongPress: () {
-                  if (!isShowSearch) {
+          return CustomScrollView(
+            slivers: [
+              SliverPersistentHeader(
+                floating: true,
+                delegate: CategoryDelegate(
+                  itemKeys: _itemKeys,
+                  activeIndex: _activeIndex,
+                  scrollController: _scrollController,
+                  selectIndex: (v) {
                     setState(() {
-                      isShowCheck = true;
-                      _addOrRemoveNotes(state.allNotes[index]);
+                      _activeIndex = v;
                     });
-                  }
-                },
-              );
-            },
+                    scrollToCenter(_activeIndex);
+                  },
+                ),
+              ),
+              SliverPadding(
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return HomeItem(
+                        onTab: () => _onTabHomeItem(state.allNotes[index]),
+                        notesModel: state.allNotes[index],
+                        isShowCheck: isShowCheck,
+                        checkValue: notesModels.contains(state.allNotes[index]),
+                        onChangedCheck: (bool? value) {
+                          _addOrRemoveNotes(state.allNotes[index]);
+                        },
+                        onLongPress: () {
+                          if (!isShowSearch) {
+                            setState(() {
+                              isShowCheck = true;
+                              _addOrRemoveNotes(state.allNotes[index]);
+                            });
+                          }
+                        },
+                      );
+                    },
+                    childCount: state.allNotes.length,
+                  ),
+                ),
+                padding: EdgeInsets.only(bottom: 100.he),
+              ),
+            ],
           );
         },
         listener: (BuildContext context, NotesState state) {},
@@ -245,5 +296,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ).then((v) => setState(() {}));
     }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }

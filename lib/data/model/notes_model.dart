@@ -20,7 +20,6 @@ class NotesModel {
   });
 
   factory NotesModel.fromJson(Map<String, dynamic> json) {
-    debugPrint(json[NotesConstanse.color].toString());
     return NotesModel(
       id: json[NotesConstanse.id] as int? ?? 0,
       title: json[NotesConstanse.name] as String? ?? "",

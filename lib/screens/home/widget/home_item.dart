@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mynotes/data/model/notes_model.dart';
@@ -32,8 +33,7 @@ class HomeItem extends StatelessWidget {
 
     return Stack(
       children: [
-        AnimatedContainer(
-          width: double.infinity,
+        AnimatedPadding(
           duration: const Duration(milliseconds: 250),
           padding: EdgeInsets.only(
             top: 8.he,
@@ -41,42 +41,57 @@ class HomeItem extends StatelessWidget {
             left: isShowCheck ? 45.we : 15.we,
             right: 15.we,
           ),
-          child: GestureDetector(
-            onLongPress: onLongPress,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                padding:
-                    EdgeInsets.symmetric(vertical: 12.he, horizontal: 12.we),
-                backgroundColor: notesModel.color,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.r),
+          child: Container(
+            decoration: BoxDecoration(
+              color: notesModel.color,
+              borderRadius: BorderRadius.circular(10.r),
+              boxShadow: [
+                BoxShadow(
+                  color: notesModel.color.withValues(alpha: 0.15),
+                  offset: const Offset(0, 4),
+                  blurRadius: 10,
                 ),
-              ),
+                BoxShadow(
+                  color: notesModel.color.withValues(alpha: 0.05),
+                  offset: const Offset(0, 2),
+                  blurRadius: 4,
+                ),
+              ],
+            ),
+            child: CupertinoButton(
+              onLongPress: onLongPress,
               onPressed: onTab,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    notesModel.title,
-                    style: AppTextStyle.nunitoMedium.copyWith(
-                      fontSize: 16.sp,
-                      color: titleColor,
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        notesModel.date,
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: titleColor,
-                          fontWeight: FontWeight.w400,
-                        ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 12.he,
+                  horizontal: 12.we,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      notesModel.title,
+                      style: AppTextStyle.nunitoMedium.copyWith(
+                        fontSize: 16.sp,
+                        color: titleColor,
+                        fontWeight: FontWeight.w600,
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          notesModel.date,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: titleColor,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
