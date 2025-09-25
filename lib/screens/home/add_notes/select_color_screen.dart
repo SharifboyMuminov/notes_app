@@ -221,7 +221,9 @@ class _ColorScreenState extends State<ColorScreen> {
   _onTabSave() {
     DateTime dateTime = DateTime.now();
 
-    String nowDate = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+    String nowDate = "${dateTime.day.toString().padLeft(2,'0')}/"
+        "${dateTime.month.toString().padLeft(2,'0')}/"
+        "${dateTime.year}";
     noteModel = noteModel.copyWith(
       color: myColors[currentColorIndex],
       date: nowDate,
