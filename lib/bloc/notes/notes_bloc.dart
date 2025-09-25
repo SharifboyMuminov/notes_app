@@ -19,7 +19,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   Future<void> _fetchNotes(NotesFetchEvent event, emit) async {
     emit(state.copyWith(formStatus: FormStatus.loading));
 
-    SqfliteResponse sqfliteResponse = await _localDatabase.getAllNotes();
+    NetworkResponse sqfliteResponse = await _localDatabase.getAllNotes();
 
     if (sqfliteResponse.errorText.isEmpty) {
       emit(
@@ -41,7 +41,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   Future<void> _addNotes(NotesAddEvent event, emit) async {
     emit(state.copyWith(formStatus: FormStatus.loading));
 
-    SqfliteResponse sqfliteResponse =
+    NetworkResponse sqfliteResponse =
         await _localDatabase.insertNotes(event.notesModel);
 
     if (sqfliteResponse.errorText.isEmpty) {
@@ -59,7 +59,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   Future<void> _updateNotes(NotesUpdateEvent event, emit) async {
     emit(state.copyWith(formStatus: FormStatus.loading));
 
-    SqfliteResponse sqfliteResponse = await _localDatabase.updateNotes(
+    NetworkResponse sqfliteResponse = await _localDatabase.updateNotes(
       noteModel: event.notesModel,
     );
 
@@ -80,7 +80,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     emit(state.copyWith(formStatus: FormStatus.loading));
 
     if (notesSearchEvent.title.isNotEmpty) {
-      SqfliteResponse sqfliteResponse =
+      NetworkResponse sqfliteResponse =
           await _localDatabase.searchNotes(notesSearchEvent.title);
 
       if (sqfliteResponse.errorText.isEmpty) {
@@ -106,7 +106,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   Future<void> _deleteNotes(NotesDeleteEvent event, emit) async {
     emit(state.copyWith(formStatus: FormStatus.loading));
 
-    SqfliteResponse sqfliteResponse =
+    NetworkResponse sqfliteResponse =
     await _localDatabase.deleteNotes(event.notesModels);
 
     if (sqfliteResponse.errorText.isEmpty) {

@@ -1,6 +1,6 @@
-class SqfliteResponse {
+class NetworkResponse {
   dynamic data;
   String errorText;
 
-  SqfliteResponse({this.errorText = "", this.data});
+  NetworkResponse({this.errorText = "", this.data});
 }

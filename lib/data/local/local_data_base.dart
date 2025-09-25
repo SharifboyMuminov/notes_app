@@ -47,8 +47,8 @@ class LocalDatabase {
     )''');
   }
 
-  Future<SqfliteResponse> insertNotes(NotesModel personModel) async {
-    SqfliteResponse myResponse = SqfliteResponse();
+  Future<NetworkResponse> insertNotes(NotesModel personModel) async {
+    NetworkResponse myResponse = NetworkResponse();
 
     try {
       final db = await databaseInstance.database;
@@ -64,8 +64,8 @@ class LocalDatabase {
     return myResponse;
   }
 
-  Future<SqfliteResponse> getAllNotes() async {
-    SqfliteResponse myResponse = SqfliteResponse();
+  Future<NetworkResponse> getAllNotes() async {
+    NetworkResponse myResponse = NetworkResponse();
 
     try {
       final db = await databaseInstance.database;
@@ -78,8 +78,8 @@ class LocalDatabase {
 
     return myResponse;
   }
-  Future<SqfliteResponse> deleteNotes(List<NotesModel> noteModels) async {
-    SqfliteResponse myResponse = SqfliteResponse();
+  Future<NetworkResponse> deleteNotes(List<NotesModel> noteModels) async {
+    NetworkResponse myResponse = NetworkResponse();
 
     try {
       final db = await databaseInstance.database;
@@ -104,8 +104,8 @@ class LocalDatabase {
   }
 
 
-  Future<SqfliteResponse> updateNotes({required NotesModel noteModel}) async {
-    SqfliteResponse myResponse = SqfliteResponse();
+  Future<NetworkResponse> updateNotes({required NotesModel noteModel}) async {
+    NetworkResponse myResponse = NetworkResponse();
 
     try {
       final db = await databaseInstance.database;
@@ -121,8 +121,8 @@ class LocalDatabase {
     return myResponse;
   }
 
-  Future<SqfliteResponse> searchNotes(String query) async {
-    SqfliteResponse myResponse = SqfliteResponse();
+  Future<NetworkResponse> searchNotes(String query) async {
+    NetworkResponse myResponse = NetworkResponse();
 
     try {
       final db = await databaseInstance.database;

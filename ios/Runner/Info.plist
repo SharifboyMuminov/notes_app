@@ -45,5 +45,24 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+    </dict>
+
+
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+	        <string>com.googleusercontent.apps.299000341165-5q7ur8jk7hfe5lqhjhhv56q7qi9klfjv</string>
+        </array>
+      </dict>
+    </array>
+
+
 </dict>
 </plist>
