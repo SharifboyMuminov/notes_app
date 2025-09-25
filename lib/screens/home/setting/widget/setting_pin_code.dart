@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,7 +25,7 @@ class SettingPinCodeState extends State<SettingPinCode> {
   Widget build(BuildContext context) {
     return Padding(
       padding:
-      EdgeInsets.only(top: 31.he, left: 6.we, right: 6.we, bottom: 30.he),
+          EdgeInsets.only(top: 31.he, left: 6.we, right: 6.we, bottom: 30.he),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -32,9 +33,10 @@ class SettingPinCodeState extends State<SettingPinCode> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.we),
             child: Text(
-              'Pin helps protect your personal data',
+              'pin_protection'.tr(),
+              textAlign: TextAlign.center,
               style: AppTextStyle.nunitoMedium.copyWith(
-                fontSize: 17.sp,
+                fontSize: 14.sp,
                 color: AppColors.white,
               ),
             ),
@@ -156,7 +158,7 @@ class SettingPinCodeState extends State<SettingPinCode> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
         4,
-            (index) {
+        (index) {
           return buildPinNumber(index);
         },
       ),
@@ -178,8 +180,7 @@ class SettingPinCodeState extends State<SettingPinCode> {
     return AnimatedContainer(
       padding: EdgeInsets.symmetric(horizontal: 8.we),
       decoration: BoxDecoration(
-        color:
-        currentPin.length > index ? AppColors.white : AppColors.c3B3B3B,
+        color: currentPin.length > index ? AppColors.white : AppColors.c3B3B3B,
         shape: BoxShape.circle,
       ),
       duration: const Duration(milliseconds: 170),

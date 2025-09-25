@@ -29,6 +29,7 @@ class _SettingLanguageScreenState extends State<SettingLanguageScreen> {
 
   void _getCurrentLanguage() {
     Future.microtask(() {
+      if (!context.mounted) return;
       final locale = EasyLocalization.of(context)!.currentLocale;
       if (locale!.languageCode == 'uz') {
         currentLanguage = CurrentLanguage.uzbek;
@@ -41,72 +42,72 @@ class _SettingLanguageScreenState extends State<SettingLanguageScreen> {
     });
   }
 
-  void _changeLanguage(Locale locale) {
-    setState(() {
-      EasyLocalization.of(context)!.setLocale(locale);
-      widget.onSet.call();
-    });
+  void _changeLanguage(Locale locale) async {
+    await EasyLocalization.of(context)!.setLocale(locale);
+    widget.onSet.call();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.we),
-        child: Column(
-          children: [
-            25.getH(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MainIconButton(
-                  onTab: () => Navigator.pop(context),
-                  iconPath: AppImages.arrowBackSvg,
-                ),
-                Text(
-                  "language".tr(),
-                  style: AppTextStyle.nunitoMedium.copyWith(
-                    fontSize: 17.sp,
-                    color: AppColors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.we),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MainIconButton(
+                    onTab: () => Navigator.pop(context),
+                    iconPath: AppImages.arrowBackSvg,
                   ),
-                ),
-                Text(
-                  "ings",
-                  style: AppTextStyle.nunitoMedium.copyWith(
-                    fontSize: 17.sp,
-                    color: Colors.transparent,
+                  Text(
+                    "language".tr(),
+                    style: AppTextStyle.nunitoMedium.copyWith(
+                      fontSize: 17.sp,
+                      color: AppColors.white,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            20.getH(),
-            LanguageMyButton(
-              onTab: () {
-                _changeLanguage(const Locale("uz", "UZ"));
-              },
-              title: 'uz'.tr(),
-              iconPath: AppImages.uzbFlagSvg,
-              active: currentLanguage == CurrentLanguage.uzbek,
-            ),
-            10.getH(),
-            LanguageMyButton(
-              onTab: () {
-                _changeLanguage(const Locale('ru', 'RU'));
-              },
-              title: 'ru'.tr(),
-              iconPath: AppImages.russiaFlagSvg,
-              active: currentLanguage == CurrentLanguage.russia,
-            ),
-            10.getH(),
-            LanguageMyButton(
-              onTab: () {
-                _changeLanguage(const Locale('en', 'EN'));
-              },
-              title: 'en'.tr(),
-              iconPath: AppImages.americaFlagSvg,
-              active: currentLanguage == CurrentLanguage.english,
-            ),
-          ],
+                  Text(
+                    "ings",
+                    style: AppTextStyle.nunitoMedium.copyWith(
+                      fontSize: 17.sp,
+                      color: Colors.transparent,
+                    ),
+                  ),
+                ],
+              ),
+              20.getH(),
+              LanguageMyButton(
+                onTab: () {
+                  _changeLanguage(const Locale("uz", "UZ"));
+                },
+                title: 'uz'.tr(),
+                iconPath: AppImages.uzbFlagSvg,
+                active: currentLanguage == CurrentLanguage.uzbek,
+              ),
+              10.getH(),
+              LanguageMyButton(
+                onTab: () {
+                  _changeLanguage(const Locale('ru', 'RU'));
+                },
+                title: 'ru'.tr(),
+                iconPath: AppImages.russiaFlagSvg,
+                active: currentLanguage == CurrentLanguage.russia,
+              ),
+              10.getH(),
+              LanguageMyButton(
+                onTab: () {
+                  _changeLanguage(const Locale('en', 'EN'));
+                },
+                title: 'en'.tr(),
+                iconPath: AppImages.americaFlagSvg,
+                active: currentLanguage == CurrentLanguage.english,
+              ),
+            ],
+          ),
         ),
       ),
     );

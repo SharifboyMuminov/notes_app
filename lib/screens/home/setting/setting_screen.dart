@@ -21,67 +21,68 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.we),
-        child: Column(
-          children: [
-            30.getH(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MainIconButton(
-                  onTab: () => Navigator.pop(context),
-                  iconPath: AppImages.arrowBackSvg,
-                ),
-                Text(
-                  "settings".tr(),
-                  style: AppTextStyle.nunitoMedium.copyWith(
-                    fontSize: 17.sp,
-                    color: AppColors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.we),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MainIconButton(
+                    onTab: () => Navigator.pop(context),
+                    iconPath: AppImages.arrowBackSvg,
                   ),
-                ),
-                Text(
-                  "Settings",
-                  style: AppTextStyle.nunitoMedium.copyWith(
-                    fontSize: 17.sp,
-                    color: Colors.transparent,
+                  Text(
+                    "settings".tr(),
+                    style: AppTextStyle.nunitoMedium.copyWith(
+                      fontSize: 17.sp,
+                      color: AppColors.white,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            20.getH(),
-            SettingItem(
-              onTab: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const SettingPasscodeScreen();
-                    },
+                  Text(
+                    "Settings",
+                    style: AppTextStyle.nunitoMedium.copyWith(
+                      fontSize: 17.sp,
+                      color: Colors.transparent,
+                    ),
                   ),
-                );
-              },
-              title: 'passcode'.tr(),
-            ),
-            15.getH(),
-            SettingItem(
-              onTab: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SettingLanguageScreen(
-                        onSet: () {
-                          setState(() {});
-                        },
-                      );
-                    },
-                  ),
-                );
-              },
-              title: 'language'.tr(),
-            ),
-          ],
+                ],
+              ),
+              20.getH(),
+              SettingItem(
+                onTab: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const SettingPasscodeScreen();
+                      },
+                    ),
+                  );
+                },
+                title: 'passcode'.tr(),
+              ),
+              15.getH(),
+              SettingItem(
+                onTab: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SettingLanguageScreen(
+                          onSet: () {
+                            setState(() {});
+                          },
+                        );
+                      },
+                    ),
+                  );
+                },
+                title: 'language'.tr(),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -38,7 +38,7 @@ class SettingItem extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: AppTextStyle.nunitoMedium.copyWith(
-                fontSize: 17.sp,
+                fontSize: 14.sp,
                 color: titleColor ?? AppColors.white,
               ),
             ),

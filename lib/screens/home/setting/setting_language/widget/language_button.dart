@@ -45,7 +45,7 @@ class LanguageMyButton extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: AppTextStyle.nunitoSemiBold.copyWith(
-                fontSize: 16.sp,
+                fontSize: 14.sp,
                 color: AppColors.white,
               ),
             ),
