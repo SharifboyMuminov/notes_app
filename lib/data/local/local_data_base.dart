@@ -1,3 +1,4 @@
+import 'package:mynotes/data/model/category_model.dart';
 import 'package:mynotes/data/model/notes_model.dart';
 import 'package:mynotes/data/model/sqflite_response.dart';
 import 'package:sqflite/sqflite.dart';
@@ -37,7 +38,7 @@ class LocalDatabase {
     const idType = "INTEGER PRIMARY KEY AUTOINCREMENT";
     const textType = "TEXT NOT NULL";
 
-    await db.execute('''CREATE TABLE ${NotesConstanse.tableName} (
+    await db.execute('''CREATE TABLE ${NotesConstanse.tableNameNotes} (
       ${NotesConstanse.id} $idType,
       ${NotesConstanse.date} $textType,
       ${NotesConstanse.createDate} $textType,
@@ -45,6 +46,63 @@ class LocalDatabase {
       ${NotesConstanse.name} $textType,
       ${NotesConstanse.color} $textType
     )''');
+
+    await db.execute('''CREATE TABLE ${NotesConstanse.tableNameCategory} (
+      ${NotesConstanse.id} $idType,
+      ${NotesConstanse.name} $textType,
+      ${NotesConstanse.color} $textType
+    )''');
+  }
+
+  Future<SqfliteResponse> fetchCategories() async {
+    SqfliteResponse myResponse = SqfliteResponse();
+
+    try {
+      final db = await databaseInstance.database;
+      String orderBy = "${NotesConstanse.id} DESC";
+      List json =
+          await db.query(NotesConstanse.tableNameCategory, orderBy: orderBy);
+      myResponse.data = json.map((e) => CategoryModel.fromJson(e)).toList();
+    } catch (error) {
+      myResponse.errorText = error.toString();
+    }
+
+    return myResponse;
+  }
+
+  Future<SqfliteResponse> deleteCategory(int categoryId) async {
+    SqfliteResponse myResponse = SqfliteResponse();
+
+    try {
+      final db = await databaseInstance.database;
+
+      myResponse.data = await db.delete(
+        NotesConstanse.tableNameCategory,
+        where: "${NotesConstanse.id} = ?",
+        whereArgs: [categoryId],
+      );
+    } catch (error) {
+      myResponse.errorText = error.toString();
+    }
+
+    return myResponse;
+  }
+
+  Future<SqfliteResponse> insertCategory(CategoryModel categoryModel) async {
+    SqfliteResponse myResponse = SqfliteResponse();
+
+    try {
+      final db = await databaseInstance.database;
+
+      int savedTaskID = await db.insert(
+          NotesConstanse.tableNameCategory, categoryModel.toJson());
+
+      myResponse.data = categoryModel.copyWith(id: savedTaskID);
+    } catch (error) {
+      myResponse.errorText = error.toString();
+    }
+
+    return myResponse;
   }
 
   Future<SqfliteResponse> insertNotes(NotesModel personModel) async {
@@ -54,7 +112,7 @@ class LocalDatabase {
       final db = await databaseInstance.database;
 
       int savedTaskID =
-          await db.insert(NotesConstanse.tableName, personModel.toJson());
+          await db.insert(NotesConstanse.tableNameNotes, personModel.toJson());
 
       myResponse.data = personModel.copyWith(id: savedTaskID);
     } catch (error) {
@@ -70,7 +128,8 @@ class LocalDatabase {
     try {
       final db = await databaseInstance.database;
       String orderBy = "${NotesConstanse.id} DESC";
-      List json = await db.query(NotesConstanse.tableName, orderBy: orderBy);
+      List json =
+          await db.query(NotesConstanse.tableNameNotes, orderBy: orderBy);
       myResponse.data = json.map((e) => NotesModel.fromJson(e)).toList();
     } catch (error) {
       myResponse.errorText = error.toString();
@@ -78,6 +137,7 @@ class LocalDatabase {
 
     return myResponse;
   }
+
   Future<SqfliteResponse> deleteNotes(List<NotesModel> noteModels) async {
     SqfliteResponse myResponse = SqfliteResponse();
 
@@ -92,7 +152,7 @@ class LocalDatabase {
 
       // Execute the delete query using the IN clause
       myResponse.data = await db.delete(
-        NotesConstanse.tableName,
+        NotesConstanse.tableNameNotes,
         where: "${NotesConstanse.id} IN ($placeholders)",
         whereArgs: noteIds,
       );
@@ -103,7 +163,6 @@ class LocalDatabase {
     return myResponse;
   }
 
-
   Future<SqfliteResponse> updateNotes({required NotesModel noteModel}) async {
     SqfliteResponse myResponse = SqfliteResponse();
 
@@ -112,7 +171,7 @@ class LocalDatabase {
       // debugPrint(noteModel.id.toString());
 
       myResponse.data = await db.update(
-          NotesConstanse.tableName, noteModel.toJsonForUpdate(),
+          NotesConstanse.tableNameNotes, noteModel.toJsonForUpdate(),
           where: "${NotesConstanse.id} = ?", whereArgs: [noteModel.id]);
     } catch (error) {
       myResponse.errorText = error.toString();
@@ -127,7 +186,7 @@ class LocalDatabase {
     try {
       final db = await databaseInstance.database;
 
-      var json = await db.query(NotesConstanse.tableName,
+      var json = await db.query(NotesConstanse.tableNameNotes,
           where: "${NotesConstanse.name} LIKE ?", whereArgs: ["$query%"]);
 
       myResponse.data = json.map((e) => NotesModel.fromJson(e)).toList();

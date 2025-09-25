@@ -83,7 +83,8 @@ class NotesModel {
 }
 
 class NotesConstanse {
-  static const tableName = "note_table";
+  static const tableNameNotes = "note_table";
+  static const tableNameCategory = "category_table";
   static const name = "name";
   static const createDate = "create_date";
   static const description = "description";

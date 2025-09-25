@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mynotes/bloc/category/category_bloc.dart';
 import 'package:mynotes/bloc/notes/notes_bloc.dart';
 import 'package:mynotes/data/local/local_data_base.dart';
 import 'package:mynotes/screens/splash/splash_screen.dart';
@@ -20,6 +21,11 @@ class App extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => NotesBloc(
+              context.read<LocalDatabase>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => CategoryBloc(
               context.read<LocalDatabase>(),
             ),
           ),
